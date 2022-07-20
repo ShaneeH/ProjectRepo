@@ -1,4 +1,63 @@
-<h2> Cart Service</h2>
-<div *ngFor="let i of Cart">
-    {{i}}
-</div>
+
+<br><br><br>
+<h2> Cart 2</h2>
+<h2>**********</h2>
+
+<div *ngIf="cartService.CartData.length != 0; else elseBlock">
+
+
+    <div class="receipt">
+      <div class="receipt-list">
+        <div class="receipt-item">
+          <div class="cart-header"> 
+            <p>Shopping Basket</p>
+            <img src='assets/images/cart.png' alt='image' style="width:60px">  
+          </div>
+  
+          
+          <div *ngFor=" let i of Names">     
+            <h3>{{i}}</h3>
+            </div>
+  
+            <div *ngFor=" let i of Qty">     
+              <h3>{{i}}</h3>
+              </div>
+              
+  
+    
+  
+  
+        </div> 
+        <div class="Total">
+          <h3> Total : $ {{CartTotal}}</h3>
+      </div>
+      <button class="btn draw-border">PAY</button>
+      <br>
+      <br>
+      <br>
+      <div class="clear-txt"> 
+        <p id="demo" (click)="clearCart()">Empty Basket</p>
+      </div>
+      
+      </div>
+      </div>
+    
+  </div>
+  
+    <ng-template #elseBlock>
+      <div class="empty-basket">
+        <br>
+      <img src='assets/images/bag.png' alt='image' style="width:120px"> 
+      <br><br><br>
+   
+      <p>Basket is empty bro</p>
+      </div>
+    
+    </ng-template>
+
+    <br><br><br><br><br>
+    <h1>Cookies Cart Test</h1>
+
+<div *ngFor=" let i of CookieCart">     
+            <h3>{{i}}</h3>
+            </div>

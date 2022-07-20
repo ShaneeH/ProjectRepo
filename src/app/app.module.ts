@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreComponent } from './store/store.component';
@@ -9,6 +8,11 @@ import { MaterialModule } from '../material.module';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TestComponent } from './test/test.component';
+import { AuthModule } from '@auth0/auth0-angular';
+import {MatButtonModule} from '@angular/material/button';
+
+
 
 
 @NgModule({
@@ -16,14 +20,22 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     StoreComponent,
     HomeComponent,
-    CartComponent
+    CartComponent,
+    TestComponent,
+  
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule
+    MatButtonModule,
+    HttpClientModule,
+    AuthModule.forRoot({
+      domain: 'dev-mwii895t.us.auth0.com',  
+      clientId: 'j2vRGnVmUyB1d9AW6uPQ5MpiIS0qlU9W'
+    }),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

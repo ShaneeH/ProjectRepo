@@ -10,25 +10,115 @@ import { NodeWithI18n } from '@angular/compiler';
 })
 export class CartComponent implements OnInit {
 
-  public CartToal;
+  //Maybe set values to LocalStorage and Get them from Local Storage
+
+  //Remember to add If Cart is Empty in the view
+  
+  
+  public a = [];
+
+
+  public CartTotal;
   public Cart : Array<Item>;
   public new : Item;
+  public uElements : Array<Item>;
+  public CartSize : number;
+  public u : any;
+  public CookieCart : [];
 
-  constructor(private cartService: CartService) {
 
-    for(let i = 0; i < this.cartService.sharedData.length; i++){
+    //Arrays that hold the Product Names and Qty
+    public Names = [];
+    public Qty = [];
 
-      /* this.new.name = this.cartService.sharedData[i].name;
-      this.new.category = this.cartService.sharedData[i].category;
-      this.new.price = this.cartService.sharedData[i].price;
-      this.new.img = this.cartService.sharedData[i].img;
-      this.Cart.push(this.new);
-      console.log(this.Cart[i]); */
+
+  public Obj = { ProductName: this.Names, Quantites: this.Qty };
+  public f: any;
+  public Obj2 = {
+    ProductName: [],
+    Quantites: []
+  };
+
+  
+  constructor(public cartService: CartService) {
+
+    
+
+    function onlyUnique(value, index, self) {
+      return self.indexOf(value) === index;
+    }
+
+    this.Cart = this.cartService.CartData;
+    this.CartSize = this.Cart.length;
+    this.CartTotal = this.cartService.Total;
+    
+   //Sets all Unique Elements into a new array
+   this.uElements = [...new Set(this.Cart)];
+
+   var json_str = JSON.stringify(this.uElements);
+  // document.cookie = 'mycookie' = json_str;
+
+
+  //console.log("This is uElements:");
+ // for (let i = 0; i <this.uElements.length; i++ ){
+ //   console.log(this.uElements[i]);
+//  }
+
+  //Get Unique Elements
+
+
+  //THIS IS LEGACY CODE 
+  for (let i = 0; i < this.cartService.CartData.length; i++) {
+
+    // This array will hold all the unique Product Names in the Array
+    this.a.push(this.cartService.CartData[i].name);
+
   }
+
+  var unique = this.a.filter(onlyUnique);
+
+  //Array with all names
+  this.Names = unique;
+
+  for (let i = 0; i > this.Names.length; i++) {
+    function getOccurrence(array, value) {
+
+      return array.filter((v) => (v === value)).length;
+
+    }
+  }
+
+  function getOccurrence(array, value) {
+
+    return array.filter((v) => (v === value)).length;
+
+  }
+
+  for (let i = 0; i < this.Names.length; i++) {
+
+    let occ = getOccurrence(this.a, this.Names[i]);
+    this.Qty.push(occ);
+
+  }
+
 
    }
 
   ngOnInit(): void {
+  }
+
+  clearCart(){
+    console.log("Clear Cart")
+    this.uElements.length = 0;
+    this.CartTotal = 0;
+
+    this.cartService.CartData.length = 0;
+    this.cartService.Total = 0;
+  }
+
+
+   Unique(value, index, self) {
+    return self.indexOf(value) === index;
   }
 
 }

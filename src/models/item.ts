@@ -6,6 +6,6 @@ export class Item{
     img: string;
     
 
-    //Had to change string to false in the tsconfig.json
+    //Had to change string to false in the tsconfig.json to remove error
 
 }
