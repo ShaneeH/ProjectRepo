@@ -9,20 +9,7 @@ import { AuthService } from '@auth0/auth0-angular';
 export class AppComponent{
 
 
-  title = 'angularShop';
-  public x : number;
-
-  constructor(public auth: AuthService, public C : CartService){
-    this.x = C.CartData.length;
-    console.log(this.x);
-  }
-
-s
-  ngOnChanges(changes: SimpleChanges ): void {
-    throw new Error('Method not implemented.');
-  }
-
-
+  
 }
 
 

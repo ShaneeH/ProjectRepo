@@ -11,6 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TestComponent } from './test/test.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import {MatButtonModule} from '@angular/material/button';
+import { CookieService } from 'ngx-cookie-service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 
@@ -22,6 +24,7 @@ import {MatButtonModule} from '@angular/material/button';
     HomeComponent,
     CartComponent,
     TestComponent,
+    NavbarComponent,
   
   ],
   imports: [
@@ -37,7 +40,7 @@ import {MatButtonModule} from '@angular/material/button';
     }),
     
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

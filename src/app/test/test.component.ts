@@ -5,6 +5,7 @@ import { CartService } from 'src/services/cart.service';
 import { Item } from 'src/models/item';
 import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -33,7 +34,8 @@ export class TestComponent implements OnInit {
   public verifiedEmail : boolean;
 
 
-  constructor(@Inject(DOCUMENT) public document: Document, private http: HttpClient, private cartService  : CartService , public auth: AuthService
+  constructor(@Inject(DOCUMENT) public document: Document, private http: HttpClient, private cartService  : CartService ,
+   public auth: AuthService, private cookieService: CookieService
     ) { 
 
      this.auth.user$.subscribe(s => {
@@ -50,7 +52,6 @@ export class TestComponent implements OnInit {
     this.http.get<any>('https://localhost:7005/Users/All').subscribe(data => { 
       this.users=data
       console.log(data); 
-
    });
 
    this.filter();
@@ -115,14 +116,18 @@ export class TestComponent implements OnInit {
 
 
  getCookies(){
-  //var storedAry = JSON.parse($.cookie('cart_items'));
-  let Cookie = document.cookie
-  .split('; ')
-  .find(row => row.startsWith('cart_items='))
-  ?.split('=')[1]
-  console.log(JSON.parse(Cookie));
-  let CookieJ = JSON.parse(Cookie);
-  console.log(CookieJ[0]);
+
+  let test = this.cookieService.get('cart_items');
+  console.log("Using New Service");
+  let jtest = JSON.parse(test);
+  console.log(jtest[0]);
+
+ }
+
+ deleteCookies(){
+  this.cookieService.deleteAll();
+  location.reload();
+  
  }
 
  

@@ -22,11 +22,7 @@
             <div *ngFor=" let i of Qty">     
               <h3>{{i}}</h3>
               </div>
-              
-  
-    
-  
-  
+                
         </div> 
         <div class="Total">
           <h3> Total : $ {{CartTotal}}</h3>
@@ -55,9 +51,19 @@
     
     </ng-template>
 
+
+
+
+
+
+
+    <!--THIS IS WHERE I WILL TEST THE COOKIES -->
     <br><br><br><br><br>
+
+    
     <h1>Cookies Cart Test</h1>
 
-<div *ngFor=" let i of CookieCart">     
-            <h3>{{i}}</h3>
-            </div>
+<div *ngFor=" let i of items">     
+            <h3>{{i.name}}</h3>
+            <h3>{{i.price}}</h3>
+</div>
