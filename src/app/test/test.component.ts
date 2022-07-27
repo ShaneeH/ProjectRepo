@@ -6,7 +6,8 @@ import { Item } from 'src/models/item';
 import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
-
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 
 
@@ -35,7 +36,7 @@ export class TestComponent implements OnInit {
 
 
   constructor(@Inject(DOCUMENT) public document: Document, private http: HttpClient, private cartService  : CartService ,
-   public auth: AuthService, private cookieService: CookieService
+   public auth: AuthService, private cookieService: CookieService, private box : MatDialog
     ) { 
 
      this.auth.user$.subscribe(s => {
@@ -108,6 +109,16 @@ export class TestComponent implements OnInit {
   this.u =  [...new Set(this.cartService.CartData)];
  }
 
+ openDialog(){
+  console.log("Dialog box clicked");
+  this.box.open(DialogComponent);
+  setTimeout(() => {
+    this.box.closeAll();
+  }, 500);
+
+
+ }
+
  cookies(){
   console.log("Cookie button pressed");
   let x = document.cookie;
@@ -131,4 +142,5 @@ export class TestComponent implements OnInit {
  }
 
  
+
 }

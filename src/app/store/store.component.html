@@ -2,8 +2,7 @@
 <mat-toolbar class="mat-elevation-z8">
     <button mat-icon-button *ngIf="sidenav.mode == 'side'" (click)="sidenav.toggle()" >
       <mat-icon *ngIf="!sidenav.opened"> filter_list </mat-icon>
-      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-      
+      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>    
     </button>
   </mat-toolbar>
   <mat-sidenav-container>
@@ -55,8 +54,9 @@
              <h2> {{i.name}} </h2>
              <p>Details about the product</p>
              <div class="product-bottom-details">
-                <div class="product-price"><small>$960.00</small>${{i.price}}</div>
-                <button mat-stroked-button color="accent" (click)="addToCart(i)">Add to Cart</button>
+                
+                <button mat-stroked-button color="warn" (click)="addToCart(i)">Add to Cart</button>
+                <div class="product-price">€{{i.price}}</div>
              </div>
         </div>
     </div>

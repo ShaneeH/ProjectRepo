@@ -3,7 +3,8 @@ import { Item } from 'src/models/item';
 import {FormControl} from '@angular/forms';
 import { CartService } from 'src/services/cart.service';
 import { HttpClient } from '@angular/common/http';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
@@ -28,7 +29,7 @@ export class StoreComponent implements OnInit {
   public GTA : Item;
 
 
-  constructor(private cartService  : CartService, private http: HttpClient) { 
+  constructor(private cartService  : CartService, private http: HttpClient, private box : MatDialog) { 
 
 
     //Get Products from API
@@ -87,6 +88,12 @@ export class StoreComponent implements OnInit {
     let JSON_Cart = JSON.stringify(this.cartService.CartData);
     document.cookie = `cart_items = ${JSON_Cart}`;
     document.cookie = `cart_size = ${this.cartService.CartData.length}`;
+
+  
+      this.box.open(DialogComponent);
+      setTimeout(() => {
+        this.box.closeAll();
+      }, 610);
     
     
   }

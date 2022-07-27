@@ -1,6 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,500;1,800;1,900&family=Press+Start+2P&family=Titan+One&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600;800&family=Nunito:ital,wght@1,500;1,800;1,900&family=Press+Start+2P&family=Titan+One&display=swap');
 
 body {
   font-family: "Poppins", sans-serif;
@@ -317,6 +316,12 @@ a:focus {
   font-family: 'Titan One', cursive;
 }
 
+.slider_section .detail-box h4 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-family: 'Dosis', sans-serif;
+}
+
 .slider_section .detail-box .btn-box {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -341,6 +346,8 @@ a:focus {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   border: 2px solid #e6c511;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
  
 }
 
@@ -510,6 +517,17 @@ a:focus {
  
 }
 
+.about_section .detail-box h1 {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.about_section .detail-box h4 {
+  font-size: 20px;
+  font-family: 'Dosis', sans-serif;
+  
+}
+
 .about_section .detail-box p {
   margin-top: 15px;
 }
@@ -518,17 +536,20 @@ a:focus {
   display: inline-block;
   padding: 10px 45px;
   background-color: #f0d43a;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
   color: #ffffff;
   border-radius: 5px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  border: 1px solid #f0d43a;
+  border: 2px solid #f0d43a;
   margin-top: 15px;
 }
 
 .about_section .detail-box a:hover {
   color: #ffffff;
   -webkit-transform: translateY(-3px);
+  background-color: transparent;
           transform: translateY(-3px);
 }
 
@@ -537,6 +558,8 @@ a:focus {
 }
 
 .feature_section .heading_container {
+  font-weight: bold;
+  font-size: 30px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -567,7 +590,9 @@ a:focus {
   border-radius: 15px;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
-  margin: 15px 0;
+  margin: 5px 0;
+  font-size: 15px;
+
 }
 
 .feature_section .box .img-box img {
@@ -580,9 +605,14 @@ a:focus {
   margin-top: 15px;
 }
 
-.feature_section .box .detail-box h5 {
-  font-weight: bold;
+.feature_section .box .detail-box h4 {
+  font-weight: bolder;
   position: relative;
+}
+
+.feature_section .box .detail-box h3 {
+  font-weight:500;
+  
 }
 
 .feature_section .box .detail-box a {
@@ -619,6 +649,7 @@ a:focus {
   transition: all 0.3s;
   border: 1px solid #f0d43a;
 }
+
 
 .feature_section .btn-box a:hover {
   color: #ffffff;

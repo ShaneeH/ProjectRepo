@@ -13,6 +13,7 @@ import { AuthModule } from '@auth0/auth0-angular';
 import {MatButtonModule} from '@angular/material/button';
 import { CookieService } from 'ngx-cookie-service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 
@@ -25,6 +26,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     CartComponent,
     TestComponent,
     NavbarComponent,
+    DialogComponent,
   
   ],
   imports: [
