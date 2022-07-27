@@ -45,6 +45,9 @@ export class CartComponent implements OnInit {
   
   constructor(public cartService: CartService, public cookie: CookieService) {
 
+
+    
+
     this.items = JSON.parse(cookie.get('cart_items'));
     console.log(this.items);
     

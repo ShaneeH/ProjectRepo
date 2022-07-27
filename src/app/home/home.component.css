@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,500;1,800;1,900&family=Press+Start+2P&family=Titan+One&display=swap');
+
+
 body {
   font-family: "Poppins", sans-serif;
-  color: #0c0c0c;
   background-color: #ffffff;
   overflow-x: hidden;
 }
@@ -310,8 +312,9 @@ a:focus {
 }
 
 .slider_section .detail-box h1 {
-  font-weight: bold;
+  font-size: 48px;
   margin-bottom: 20px;
+  font-family: 'Titan One', cursive;
 }
 
 .slider_section .detail-box .btn-box {
@@ -320,6 +323,7 @@ a:focus {
   display: flex;
   margin: 0 -5px;
   margin-top: 15px;
+  font-family: 'Nunito', sans-serif;
 }
 
 .slider_section .detail-box .btn-box a {
@@ -336,13 +340,16 @@ a:focus {
   border-radius: 5px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  border: 1px solid #e6c511;
+  border: 2px solid #e6c511;
+ 
 }
 
 .slider_section .detail-box .btn-box .btn1:hover {
+  background-color: transparent;
   color: #ffffff;
   -webkit-transform: translateY(-3px);
           transform: translateY(-3px);
+  
 }
 
 .slider_section .img-box img {
@@ -476,6 +483,7 @@ a:focus {
 .about_section {
   background-color: #24252a;
   color: #ffffff;
+  padding: 5px 40px;
 }
 
 .about_section .row {
@@ -483,6 +491,7 @@ a:focus {
       -ms-flex-align: center;
           align-items: center;
 }
+
 
 .about_section .img-box {
   position: relative;
@@ -492,11 +501,13 @@ a:focus {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+         
 }
 
 .about_section .img-box img {
-  width: 100%;
-  max-width: 375px;
+  height: 400px;
+  width: 600px;
+ 
 }
 
 .about_section .detail-box p {
@@ -765,7 +776,7 @@ a:focus {
 }
 
 .footer_section {
-  background-color: #3b4a6b;
+  background-color: #232938;
   color: #ffffff;
   padding-top: 60px;
 }
