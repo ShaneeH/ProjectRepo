@@ -1,4 +1,5 @@
 <!-- SideBar -->
+<body>
 <mat-toolbar class="mat-elevation-z8">
     <button mat-icon-button *ngIf="sidenav.mode == 'side'" (click)="sidenav.toggle()" >
       <mat-icon *ngIf="!sidenav.opened"> filter_list </mat-icon>
@@ -16,7 +17,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Categories</mat-label>
         <mat-select [formControl]="form" multiple>
-          <mat-option *ngFor="let t of products" [value]="t.category ">{{t.category}}</mat-option>
+          <mat-option *ngFor="let t of Categories" [value]="t ">{{t}}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -91,8 +92,12 @@
 <!-- End of Product Cards Section-->
 
         <router-outlet></router-outlet>
+        
       </div>
+     
     </mat-sidenav-content>
+  
   </mat-sidenav-container>
+  <br><br><br><br><br><br>
 
-
+</body>

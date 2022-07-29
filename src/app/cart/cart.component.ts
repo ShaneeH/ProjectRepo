@@ -19,7 +19,11 @@ export class CartComponent implements OnInit {
   public a = [];
 
 
-  public CartTotal;
+  public CartTotal : any;
+  public Total : number;
+  public CartT : number;
+
+
   public Cart : Array<Item>;
   public new : Item;
   public uElements : Array<Item>;
@@ -44,7 +48,10 @@ export class CartComponent implements OnInit {
 
   
   constructor(public cartService: CartService, public cookie: CookieService) {
-
+    
+    //this.CartTotal = cookie.get('TotalX');
+    this.Total = Number(this.cookie.get('TotalX'));
+    this.CartT = Number(this.cookie.get('CartX'));
 
     
 
@@ -58,7 +65,8 @@ export class CartComponent implements OnInit {
 
     this.Cart = this.cartService.CartData;
     this.CartSize = this.Cart.length;
-    this.CartTotal = this.cartService.Total;
+    this.CartTotal = cookie.get('cart_total');
+
     
    //Sets all Unique Elements into a new array
    this.uElements = [...new Set(this.items)];

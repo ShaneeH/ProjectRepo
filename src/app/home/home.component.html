@@ -57,52 +57,21 @@
         </div>
       </div>
 
-      <!-- Slide Two Code-->
-      <div class="carousel-item ">
-        <div class="container-fluid ">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="detail-box">
-                <h1> Smart Watches </h1>
-                <p> Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam. </p>
-                <div class="btn-box">
-                  <a href="" class="btn1"> Contact Us </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="img-box">
-                <img src="/assets/images/slider-img.png" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide Three Code-->
-      <div class="carousel-item ">
-        <div class="container-fluid ">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="detail-box">
-                <h1> Smart Watches </h1>
-                <p> Aenean scelerisque felis ut orci condimentum laoreet. Integer nisi nisl, convallis et augue sit amet, lobortis semper quam. </p>
-                <div class="btn-box">
-                  <a href="" class="btn1"> Contact Us </a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="img-box">
-                <img src="images/slider-img.png" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  
     </div>
   </div>
 </section>
+<div class="auth">
+<ul *ngIf="auth.user$ | async as user">
+  Welcome Back {{ user.nickname}}
+</ul>
+<ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+  <button mat-raised-button color="primary" (click)="auth.logout({ returnTo: document.location.origin })"> Log out </button>
+</ng-container>
+<ng-template #loggedOut>
+  <button mat-raised-button color="accent" (click)="auth.loginWithRedirect()">Log in </button>
+</ng-template>
+</div>
 <!-- end slider section -->
 <br><br><br>
 <!-- shop section -->
@@ -400,13 +369,3 @@
     <!-- footer section -->
 </footer>
 
-<ul *ngIf="auth.user$ | async as user">
-  <h2>Hello {{ user.email}}</h2>
-</ul>
-<br>
-<ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
-  <button mat-raised-button color="primary" (click)="auth.logout({ returnTo: document.location.origin })"> Log out </button>
-</ng-container>
-<ng-template #loggedOut>
-  <button mat-raised-button color="accent" (click)="auth.loginWithRedirect()">Log in </button>
-</ng-template>

@@ -5,46 +5,52 @@ import { CartService } from 'src/services/cart.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { CookieCartService } from 'src/shared/cookie-cart.service';
+import { CookieService } from 'ngx-cookie-service';
+
+
+
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
   styleUrls: ['./store.component.css' , './navstyle.scss']
 })
 export class StoreComponent implements OnInit {
-  public types = ["Tech" , "Clothing"];
+
   public filters = [];
   public Sort = [];
   public itemName;
   public itemPrice;
-  public products : any;
+  //public products : any;
+  public Categories = [];
+  public products: Array<Item>
 
+  public cartTotal = 0;
+
+  
   //When using frop-down you need to use form
   form = new FormControl();
   sortBy = new FormControl();
 
-  //Is of type Item
-  public items: Item[];
-  public iPhone : Item;
-  public AirMax : Item;
-  public GTA : Item;
 
-
-  constructor(private cartService  : CartService, private http: HttpClient, private box : MatDialog) { 
-
+  constructor(private cartService  : CartService, private http: HttpClient, private box : MatDialog,
+              private cookie : CookieService, private c : CookieCartService
+    ) { 
 
     //Get Products from API
     this.http.get<any>('https://localhost:7005/Products/All').subscribe(data => { 
       this.products=data
       console.log("API Call attempt :");
-      console.log(data); 
+      console.log(data[0].category);   
+       
+    });
 
-   });
+       //Get Categories from API
+       this.http.get<any>('https://localhost:7005/Products/Categories').subscribe(data => { 
+        this.Categories=data;
+        console.log(data[1]);
+     });
 
-    //Push Seed Data to Items Array
-    this.items = new Array<Item>();
-    this.items.push(this.iPhone , this.AirMax , this.GTA);
-
-    
 
   }
 
@@ -54,7 +60,7 @@ export class StoreComponent implements OnInit {
 
   filter(){
 
-    // ITS BECAUSE THE OBJECTS FROM THE API HAVE NO CATEGORIES COLUMN !
+
 
     //This is code for the First Dropdown Menu
     //Add user selection to array
@@ -80,22 +86,41 @@ export class StoreComponent implements OnInit {
   }
 
   addToCart(item){
-    console.log("You added item to cart:");
-    console.log(item);
+
+    //Store the Total Amount in a Cookie
+    let CookieAmount = Number(this.cookie.get('TotalX'));
+    let newCookieAmount = CookieAmount + item.price;
+    this.cookie.set('TotalX', newCookieAmount);
+
+    //Store the Cart Size in a Cookie
+    let CartAmount = Number(this.cookie.get('CartX'));
+    let newCartAmount = CartAmount + 1;
+    this.cookie.set('CartX', newCartAmount.toString());
+
+    //Store the Cart Items into a Cookie
+    let CookieItems = this.cookie.get('ItemsX');
+    //let newCookieItems.concat(CookieItems , item)
+
+   
     this.cartService.CartData.push(item);  
     //Adding to the Total Cart Amount
     this.cartService.Total = this.cartService.Total + item.price;
     let JSON_Cart = JSON.stringify(this.cartService.CartData);
     document.cookie = `cart_items = ${JSON_Cart}`;
     document.cookie = `cart_size = ${this.cartService.CartData.length}`;
+    this.cartTotal = this.cartTotal + item.price;
+    console.log(this.cartTotal);
+    document.cookie = `cart_total = ${this.cartTotal}`;
 
-  
       this.box.open(DialogComponent);
       setTimeout(() => {
         this.box.closeAll();
       }, 610);
-    
-    
+      
+      location.reload();
+
+  
+      
   }
 
   

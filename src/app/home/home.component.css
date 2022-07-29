@@ -957,4 +957,11 @@ a:focus {
 .footer_section .footer-info p a {
   color: inherit;
 }
-/*# sourceMappingURL=style.css.map */
+
+.auth{
+  font-weight: bold;
+  color: #292929;
+  font-size: 26px;
+  text-align: center;
+  
+}
