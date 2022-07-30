@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { CookieCartService } from 'src/shared/cookie-cart.service';
 import { CookieService } from 'ngx-cookie-service';
+import { LiteralArrayExpr } from '@angular/compiler';
 
 
 
@@ -41,15 +42,17 @@ export class StoreComponent implements OnInit {
     this.http.get<any>('https://localhost:7005/Products/All').subscribe(data => { 
       this.products=data
       console.log("API Call attempt :");
-      console.log(data[0].category);   
+         
        
     });
 
        //Get Categories from API
        this.http.get<any>('https://localhost:7005/Products/Categories').subscribe(data => { 
         this.Categories=data;
-        console.log(data[1]);
+       
      });
+
+    
 
 
   }
@@ -87,6 +90,7 @@ export class StoreComponent implements OnInit {
 
   addToCart(item){
 
+    console.log("button clciked");
     //Store the Total Amount in a Cookie
     let CookieAmount = Number(this.cookie.get('TotalX'));
     let newCookieAmount = CookieAmount + item.price;
@@ -97,27 +101,73 @@ export class StoreComponent implements OnInit {
     let newCartAmount = CartAmount + 1;
     this.cookie.set('CartX', newCartAmount.toString());
 
+    
+
+
+
+
     //Store the Cart Items into a Cookie
     let CookieItems = this.cookie.get('ItemsX');
-    //let newCookieItems.concat(CookieItems , item)
+    let newCookieItems : Array<String>;
 
+
+    //NEW***
+
+    let arr : Array<String>;
+    let a = [];
+ 
+    //this.cookie.set('Items' , zz);
+    
+    let CartData = this.cookie.get('cart_items');
    
+    //document.cookie = `ItemsXZ = ${ItemArray}`;
+    //*Added
+    
     this.cartService.CartData.push(item);  
-    //Adding to the Total Cart Amount
-    this.cartService.Total = this.cartService.Total + item.price;
-    let JSON_Cart = JSON.stringify(this.cartService.CartData);
+     this.cartService.Total = this.cartService.Total + item.price;
+     let JSON_Cart = JSON.stringify(this.cartService.CartData.concat());
+   let All_Cart = JSON_Cart.concat(CartData);
     document.cookie = `cart_items = ${JSON_Cart}`;
-    document.cookie = `cart_size = ${this.cartService.CartData.length}`;
+   document.cookie = `ItemsX = ${All_Cart}`;
+
+   //NEW
+     
+    
+    let myArray = [];
+   // window.localStorage.setItem('Cart_Items', JSON.stringify(item));
+    let y = JSON.parse(window.localStorage.getItem('Cart_Items'));
+
+    try{
+
+      y.forEach(e => {
+        console.log(e);
+        myArray.push(e);
+    });
+
+
+    }catch(error){
+        console.log(error);
+
+    }
+
+    myArray.push(item);
+    window.localStorage.setItem('Cart_Items' , JSON.stringify(myArray));
+
+   //Finsihed
+
+
+
+   document.cookie = `cart_items = ${JSON_Cart + CartData}`;
+   
+  document.cookie = `cart_size = ${this.cartService.CartData.length}`;
     this.cartTotal = this.cartTotal + item.price;
-    console.log(this.cartTotal);
-    document.cookie = `cart_total = ${this.cartTotal}`;
+     document.cookie = `cart_total = ${this.cartTotal}`;
 
       this.box.open(DialogComponent);
       setTimeout(() => {
         this.box.closeAll();
       }, 610);
       
-      location.reload();
 
   
       

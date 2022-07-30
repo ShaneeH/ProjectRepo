@@ -1,14 +1,14 @@
 <head>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,900" rel="stylesheet">
 </head>
-
+<h1> Cart Component</h1>
 <body>
    <div class="CartContainer">   
    	   <div class="Header">
    	   	<button mat-raised-button color="primary"n (click)="clearCart()">empty basket</button>
    	   </div>
-<div *ngIf="items.length != 0; else elseBlock">
-<div *ngFor=" let i of items">     
+<div *ngIf="Items.length != 0; else elseBlock">
+<div *ngFor=" let i of Items">     
    	   <div class="Cart-Items">
    	   	  <div class="about">
    	   	  	<h1 class="title">{{i.name}}</h1>
@@ -20,7 +20,7 @@
    	   	  	<div class="btn">-</div>
    	   	  </div>
    	   	  <div class="prices">
-   	   	  	<div class="amount">€{{i.price}}</div>
+   	   	  	<div class="amount">{{i.price}}</div>
    	   	  	<div class="save"><u>Save for later</u></div>
    	   	  	<div class="remove"><u>Remove</u></div>
    	   	  </div>

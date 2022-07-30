@@ -39,6 +39,9 @@ export class TestComponent implements OnInit {
    public auth: AuthService, private cookieService: CookieService, private box : MatDialog
     ) { 
 
+
+
+
      this.auth.user$.subscribe(s => {
       console.log(s);
       
@@ -137,6 +140,7 @@ export class TestComponent implements OnInit {
 
  deleteCookies(){
   this.cookieService.deleteAll();
+  window.localStorage.removeItem('Cart_Items');
   location.reload();
   
  }
