@@ -39,14 +39,9 @@ export class TestComponent implements OnInit {
    public auth: AuthService, private cookieService: CookieService, private box : MatDialog
     ) { 
 
-
-
-
      this.auth.user$.subscribe(s => {
       console.log(s);
-      
-      console.log("identifier" , s['email'] , s['nickname'], s['app_metadata']);
-     // this.userEmail = s.email;
+      console.log(s['role']);      
       
      })
    // let name = "Hi Storage";
@@ -55,12 +50,12 @@ export class TestComponent implements OnInit {
   
     this.http.get<any>('https://localhost:7005/Users/All').subscribe(data => { 
       this.users=data
-      console.log(data); 
+    
    });
 
    this.filter();
    for(let i = 0; i < this.cartService.UData.length; i++){
-    console.log(this.u[i]);
+
 
   }
   }
@@ -80,7 +75,7 @@ export class TestComponent implements OnInit {
        console.log(cmd_json);
        this.http.post<any>('https://localhost:7005/Users/Create', cmd_json).subscribe(data => {
        this.postId = data.id;
-       console.log(data);
+
    });
  }
   CreateOrder(data:any){
@@ -113,7 +108,7 @@ export class TestComponent implements OnInit {
  }
 
  openDialog(){
-  console.log("Dialog box clicked");
+
   this.box.open(DialogComponent);
   setTimeout(() => {
     this.box.closeAll();
@@ -134,7 +129,7 @@ export class TestComponent implements OnInit {
   let test = this.cookieService.get('cart_items');
   console.log("Using New Service");
   let jtest = JSON.parse(test);
-  console.log(jtest[0]);
+
 
  }
 

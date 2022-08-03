@@ -14,6 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { CookieService } from 'ngx-cookie-service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -27,6 +28,7 @@ import { DialogComponent } from './dialog/dialog.component';
     TestComponent,
     NavbarComponent,
     DialogComponent,
+    AdminComponent,
   
   ],
   imports: [

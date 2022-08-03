@@ -11,7 +11,6 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class CartComponent implements OnInit {
 
-
   public CartT : number;
   public Total : number;
   public Itemz : Array<Item>;
@@ -38,23 +37,11 @@ export class CartComponent implements OnInit {
       //Error because the Concat or String Join is causing Invalid JSON
     
     }
-
-
-    
-
-  
-
-
-
-    
-
     function onlyUnique(value, index, self) {
       return self.indexOf(value) === index;
     }
 
   function getOccurrence(array, value) {
-
-   // return array.filter((v) => (v === value)).length;
 
   }
 

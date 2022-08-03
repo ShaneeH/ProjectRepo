@@ -63,8 +63,13 @@
 </section>
 <div class="auth">
 <ul *ngIf="auth.user$ | async as user">
-  Welcome Back {{ user.nickname}}
+  Welcome Back {{ user.nickname}} 
 </ul>
+
+<ul *ngIf="admin == true">
+<h3>Admin Account</h3>
+</ul>
+
 <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
   <button mat-raised-button color="primary" (click)="auth.logout({ returnTo: document.location.origin })"> Log out </button>
 </ng-container>
@@ -263,7 +268,7 @@
           </div>
           <div class="detail-box">
             <h4> Paypal </h4>
-            <h3> We use most secure Payment platform on the planet </h3>
+            <h3> We use the most secure payment platform on the planet </h3>
             <a href="">
         
               <i class="fa fa-long-arrow-right" aria-hidden="true"></i>

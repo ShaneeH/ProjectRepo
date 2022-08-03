@@ -14,12 +14,12 @@
               <li><a routerLink="">Home</a></li>
               <li><a routerLink="store">Store</a></li>
               <li><a routerLink="test">Test</a></li>
-              <li><a routerLink="cart">Cart</a></li>
               <!-- ng if for Cart Size data stored in Cookie Storage-->    
               <li *ngIf="cartSize == 0" > <a routerLink="cart"><li><i class='fas fa-shopping-basket' ></i></a></li>
-              <li *ngIf="cartSize > 0" > <a routerLink="cart"><li><i class='fas fa-shopping-basket ' ></i> {{cartSize}}</a></li>
-
-
+              <li *ngIf="cartSize > 0" > <a routerLink="cart"><li><i class='fas fa-shopping-basket'></i> {{cartSize}}</a></li>
+              <li *ngIf="admin == true" > <a routerLink="admin"><li>Admin Controlls</a></li>
+              
+              
           </ul>
       </nav>
       

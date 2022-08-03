@@ -16,6 +16,14 @@
 }
 
 
+.admin_pic img{
+  height: 22px;
+  width: 22px;
+  
+}
+
+
+
 header {
   display: flex;
   justify-content: space-between;
@@ -75,6 +83,7 @@ nav {
   display: flex;
   font-size: 18px;
 }
+
 
 .nav__links li {
   padding: 0px 20px;

@@ -10,11 +10,22 @@ import { DOCUMENT } from '@angular/common'
 })
 export class HomeComponent implements OnInit {
 
+  public admin : boolean = false;
+
   constructor(public auth: AuthService, @Inject(DOCUMENT) public document: Document) {
 
+    this.auth.user$.subscribe(s => {
+     
+         if(s['role'] == 'admin'){
+            console.log("You are admin");
+            this.admin = true;
+         }
+      
+     });
+        
 
-    
-   }
+   } 
+   
 
   ngOnInit(): void {
 
