@@ -14,12 +14,12 @@
               <li><a routerLink="">Home</a></li>
               <li><a routerLink="store">Store</a></li>
               <li><a routerLink="test">Test</a></li>
+              <li><a routerLink="profile">Profile</a></li>
               <!-- ng if for Cart Size data stored in Cookie Storage-->    
               <li *ngIf="cartSize == 0" > <a routerLink="cart"><li><i class='fas fa-shopping-basket' ></i></a></li>
               <li *ngIf="cartSize > 0" > <a routerLink="cart"><li><i class='fas fa-shopping-basket'></i> {{cartSize}}</a></li>
               <li *ngIf="admin == true" > <a routerLink="admin"><li>Admin Controlls</a></li>
-              
-              
+                         
           </ul>
       </nav>
       
@@ -29,6 +29,7 @@
       <div class="overlay__content">
           <a routerLink="home">Home</a>
           <a routerLink="test">Test</a>
+          <a routerLink="profile">Profile</a>
           <a href="#">Store</a>
           <a href="#">Cart</a>
       </div>

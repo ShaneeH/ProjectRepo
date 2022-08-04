@@ -46,6 +46,15 @@ body {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+          
+          
+
+}
+
+.heading_container h1 {
+  position: relative;
+  font-weight: bold;
+  font-size: 1px;
 }
 
 .heading_container h2 {

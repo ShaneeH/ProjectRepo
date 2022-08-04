@@ -15,7 +15,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { AdminComponent } from './admin/admin.component';
-
+import { NgxPayPalModule } from 'ngx-paypal';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -29,6 +30,7 @@ import { AdminComponent } from './admin/admin.component';
     NavbarComponent,
     DialogComponent,
     AdminComponent,
+    ProfileComponent,
   
   ],
   imports: [
@@ -36,6 +38,7 @@ import { AdminComponent } from './admin/admin.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,
+    NgxPayPalModule,
     MatButtonModule,
     HttpClientModule,
     AuthModule.forRoot({

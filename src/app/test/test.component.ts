@@ -8,6 +8,7 @@ import { DOCUMENT } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 
 
 
@@ -18,6 +19,8 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
+
+  public payPalConfig?: IPayPalConfig;
 
   public users : any;
   //public users: User[];
@@ -105,6 +108,31 @@ export class TestComponent implements OnInit {
 
  filter(){
   this.u =  [...new Set(this.cartService.CartData)];
+ }
+
+ TestEmail(){
+  let Payload = {
+    name : "Jones",
+    amount : 2300,
+    items_amount : 2
+ }
+
+  let JSON_payload = JSON.stringify(Payload);
+  console.log(JSON_payload);
+  console.log(Payload);
+
+  console.log(typeof(Payload));
+  try {
+    this.http.post<JSON>("https://localhost:7005/Mail", Payload).subscribe(data => {
+      console.log(data);
+  });
+    
+    console.log("success");
+  } catch (error) {
+    console.log("error");
+  }
+  
+  
  }
 
  openDialog(){

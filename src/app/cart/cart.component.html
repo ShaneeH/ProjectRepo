@@ -1,7 +1,10 @@
 <head>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,900" rel="stylesheet">
+
+
 </head>
 <body>
+	<script src="https://www.paypal.com/sdk/js?client-id=AUyOGfzmR4kY00aC3qdx6G0hr4SuW6LGZgoq726mXblN2pgg37ZhI9xJOns7k86XS-n5N_XgsgX_rRrN"></script>
    <div class="CartContainer">   
    	   <div class="Header">
    	   	<button mat-raised-button color="primary"n (click)="clearCart()">empty basket</button>
@@ -19,7 +22,7 @@
    	   	  	<div class="btn">-</div>
    	   	  </div>
    	   	  <div class="prices">
-   	   	  	<div class="amount">{{i.price}}</div>
+   	   	  	<div class="amount">€{{i.price}}</div>
    	   	  	<div class="save"><u>Save for later</u></div>
    	   	  	<div class="remove"><u>Remove</u></div>
    	   	  </div>
@@ -34,10 +37,13 @@
    	 	</div>
    	 	<div class="total-amount">€ {{Total}}</div>
    	 </div>
-   	 <button class="button">Checkout</button></div>
+   	 <button (click)="pay(Total)" class="button">Checkout €{{Total}}</button></div>
 	 
    </div>
 </div>
+
+
+
 
   
 <ng-template #elseBlock>

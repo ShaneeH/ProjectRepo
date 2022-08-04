@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   public admin : boolean = false;
 
   constructor(public auth: AuthService, @Inject(DOCUMENT) public document: Document) {
+    
 
     this.auth.user$.subscribe(s => {
      
