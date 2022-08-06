@@ -85,7 +85,7 @@ export class CartComponent implements OnInit {
   }
 
   clearCart(){
-    window.localStorage.removeItem('Cart_Items');
+    window.localStorage.setItem('Cart_Items', " ");
     this.EmptyCart = true;
     this.cookieService.deleteAll()
     

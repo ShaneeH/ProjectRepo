@@ -1,9 +1,24 @@
+<head>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600" rel="stylesheet" type="text/css">
+</head>
+
 <div class="admin">
     <br>
-<h1>Admin Panel</h1>
+        <div class="main-section">
+            <div class="dashbord">
+                <div class="icon-section">
+                    <i class="fa fa-users" aria-hidden="true"></i><br>
+                    <h2>Total Amount : €{{Amount}}</h2>
+                    <h3>Total Orders : {{Qty}}</h3>
+                </div>
+            </div>
+
+    </div>
 <br><br>
-<h2>All Orders</h2>
-</div>
+
+
+
 <table class="styled-table">
     <thead>
         <tr>
@@ -20,10 +35,11 @@
             <td>{{i.order_id}}</td>
             <td>{{i.email}}</td>
             <td>{{i.products}}</td>
-            <td>{{i.total}}</td>
+            <td>€{{i.total}}</td>
             <td>{{i.date}}</td>
 
         </tr>
         <!-- and so on... -->
     </tbody>
 </table>
+
