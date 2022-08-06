@@ -1,2 +1,29 @@
-<h1>Admin Console</h1>
-<h3>Profile</h3>
+<div class="admin">
+    <br>
+<h1>Admin Panel</h1>
+<br><br>
+<h2>All Orders</h2>
+</div>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Email</th>
+            <th>Products in the Order</th>
+            <th>Total Amount of Order</th>
+            <th>Date of Order</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of Orders">
+            <td>{{i.order_id}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.products}}</td>
+            <td>{{i.total}}</td>
+            <td>{{i.date}}</td>
+
+        </tr>
+        <!-- and so on... -->
+    </tbody>
+</table>

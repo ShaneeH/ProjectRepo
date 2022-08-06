@@ -21,13 +21,18 @@ export class CartComponent implements OnInit {
   public DisplayTotal : any;
   public Itemz : Array<Item>;
   public Items : Array<Item>;
+  public EmptyCart : boolean = false;
   handler:any = null;
 
   public AuthEmail : string;
   public AuthName : string;
 
+  public Names : Array<String>;
+  public word = "";
+  public arr = [];
 
-  constructor(public cookie: CookieService, public auth: AuthService, private http: HttpClient) {
+
+  constructor(public cookie: CookieService, public auth: AuthService, private http: HttpClient, private cookieService: CookieService) {
 
   
     
@@ -43,10 +48,19 @@ export class CartComponent implements OnInit {
     console.log(this.Total);
     console.log(this.Items);
 
+    console.log("NAME LOOP : ");
+    for(let i = 0; i < this.Items.length; i++){
+          console.log(this.Items[i].name);
+          this.arr[i] = this.Items[i].name;
+  
+    }
+
     this.auth.user$.subscribe(s => {
       this.AuthEmail = s.email
       this.AuthName = s.nickname
   })
+
+
 
     try {
       //this.Items = JSON.parse(cookie.get('ItemsX'));
@@ -71,7 +85,10 @@ export class CartComponent implements OnInit {
   }
 
   clearCart(){
-
+    window.localStorage.removeItem('Cart_Items');
+    this.EmptyCart = true;
+    this.cookieService.deleteAll()
+    
   }
 
    Unique(value, index, self) {
@@ -109,9 +126,19 @@ export class CartComponent implements OnInit {
       "email" : this.AuthEmail
     }
 
+    var Payload_Order  = {
+      "email" : this.AuthEmail,
+      "products" : this.arr.toString(),
+      "total" : this.Total,
+    }
+
     this.http.post<JSON>("https://localhost:7005/Mail", Payload).subscribe(data => {
       console.log(data);
   });
+
+  this.http.post<JSON>("https://localhost:7005/Orders/New", Payload_Order).subscribe(data => {
+    console.log(data);
+});
 
   }
 

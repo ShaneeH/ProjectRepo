@@ -14,20 +14,16 @@ export class HomeComponent implements OnInit {
 
   constructor(public auth: AuthService, @Inject(DOCUMENT) public document: Document) {
     
-
-    this.auth.user$.subscribe(s => {
-     
+    //Check for what Role the User is
+    this.auth.user$.subscribe(s => { 
          if(s['role'] == 'admin'){
             console.log("You are admin");
             this.admin = true;
          }
-      
      });
         
-
    } 
-   
-
+  
   ngOnInit(): void {
 
   }
