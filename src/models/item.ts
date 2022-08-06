@@ -2,8 +2,12 @@ export class Item{
 
     name: string;
     price: number;
+    brand: string;
+    desc: string;
+    type: string;
     img: string;
-    category: string;
+   
+
     //Make sure to add Description
     //desc: string;
     

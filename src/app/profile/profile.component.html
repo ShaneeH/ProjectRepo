@@ -1,3 +1,7 @@
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+
 <div class="container">
     <header>
 
@@ -12,3 +16,34 @@
           <h4 class="name">{{AuthName}}</h4>
           <p class="info">{{AuthEmail}}</p>
           <p class="info">Email Verified : {{AuthVerified}}</p>
+</div>
+</div>
+
+</main>
+</div>
+
+<div class="title"><h1>Past Orders</h1></div>
+     
+
+  <table class="styled-table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Products in the Order</th>
+            <th>Total Amount of Order</th>
+            <th>Date of Order</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of OrderList">
+            <td>{{i.order_id}}</td>
+            <td>{{i.products}}</td>
+            <td>{{i.total}}</td>
+            <td>{{i.date}}</td>
+
+        </tr>
+        <!-- and so on... -->
+    </tbody>
+</table>
+  

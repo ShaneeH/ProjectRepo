@@ -1,5 +1,52 @@
-<!-- When user clicks add item to card-->
+<!-- When user clicks add item to Cart-->
 <!-- This will be displayed-->
-
-<h1>Item added to Cart</h1>
+<div *ngIf="Reccomend == false">
+<h1>{{LatestItem.name}} added to Cart</h1>
 <h2> (: </h2>
+</div>
+
+<!-- If the User Picks a Phone this will code will Fire-->
+<div *ngIf="Reccomend == true">
+    <h1>Item added to Cart</h1>
+    <h2> (: </h2>
+    <h3>We have something that will do great with the {{LatestItem.name}} </h3>
+    <div class="wrapper">
+        <div class="container">
+          <div class="top">
+            <img src="{{RandomItem.img}}" alt="">
+          </div>
+          <div class="bottom">
+            <div class="left">
+              <div class="details">
+                <h1>{{RandomItem.name}}</h1>
+                <p>{{RandomItem.price}}</p>
+              </div>
+              <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+            </div>
+            <div class="right">
+              <div class="done"><i class="material-icons">done</i></div>
+              <div class="details">
+                <h1>{{RandomItem.name}}</h1>
+                <p>Added to your cart</p>
+              </div>
+              <div class="remove"><i class="material-icons">clear</i></div>
+            </div>
+          </div>
+        </div>
+        <div class="inside">
+          <div class="icon"><i class="material-icons">info_outline</i></div>
+          <div class="contents">
+            <table>
+              <tr>
+                <th>About</th>
+                <th>Type</th>
+              </tr>
+              <tr>
+                <td>{{RandomItem.desc}}</td>
+                <td>{{RandomItem.type}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+</div>

@@ -18,6 +18,7 @@ export class CartComponent implements OnInit {
 
   public CartT : number;
   public Total : number;
+  public DisplayTotal : any;
   public Itemz : Array<Item>;
   public Items : Array<Item>;
   handler:any = null;
@@ -25,12 +26,16 @@ export class CartComponent implements OnInit {
   public AuthEmail : string;
   public AuthName : string;
 
+
   constructor(public cookie: CookieService, public auth: AuthService, private http: HttpClient) {
 
   
     
     this.CartT = Number(cookie.get('CartX'));
     this.Total = Number(cookie.get('TotalX'));
+    let n = this.Total.toFixed(2);
+    this.DisplayTotal = Number(n);
+
     let x = cookie.get('cart_items');
 
     this.Items = JSON.parse(localStorage.getItem('Cart_Items'));

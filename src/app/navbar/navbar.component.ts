@@ -12,9 +12,11 @@ export class NavbarComponent implements OnInit {
   public admin: boolean = false;
 
   constructor(public auth: AuthService, public cookie: CookieService) {
+    
     //Get Cookie that contains cart size to display in navbar
     this.cartSize = Number(this.cookie.get("CartX"));
 
+    //Check if User is Admin
     this.auth.user$.subscribe((s) => {
       if (s["role"] == "admin") {
         this.admin = true;

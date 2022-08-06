@@ -1,103 +1,110 @@
 <!-- SideBar -->
 <body>
-<mat-toolbar class="mat-elevation-z8">
-    <button mat-icon-button *ngIf="sidenav.mode == 'side'" (click)="sidenav.toggle()" >
-      <mat-icon *ngIf="!sidenav.opened"> filter_list </mat-icon>
-      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>    
-    </button>
-  </mat-toolbar>
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8" mode="side" >
-        <!-- SideNav Content-->  
-      <button mat-button class="menu-button" routerLink="/home">
-        <mat-icon> category</mat-icon>
-        <span>Filters:</span>
+  <mat-toolbar class="mat-elevation-z8">
+      <button mat-icon-button *ngIf="sidenav.mode == 'side'" (click)="sidenav.toggle()" >
+        <mat-icon *ngIf="!sidenav.opened"> filter_list </mat-icon>
+        <mat-icon *ngIf="sidenav.opened"> close </mat-icon>    
       </button>
-      <mat-divider></mat-divider>
-      <mat-form-field appearance="fill">
-        <mat-label>Categories</mat-label>
-        <mat-select [formControl]="form" multiple>
-          <mat-option *ngFor="let t of Categories" [value]="t ">{{t}}</mat-option>
+    </mat-toolbar>
+    <mat-sidenav-container>
+      <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8" mode="side" >
+          <!-- SideNav Content-->  
+        <button mat-button class="menu-button" routerLink="/home">
+          <mat-icon> category</mat-icon>
+          <span>Filters:</span>fa
+        </button>
+        <mat-divider></mat-divider>
+        <mat-form-field appearance="fill">
+          <mat-label>Brands</mat-label>
+          <mat-select [formControl]="form" multiple>
+            <mat-option *ngFor="let t of Categories" [value]="t ">{{t}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Sort by Price</mat-label>
+        <mat-select [formControl]="sortBy" multiple>
+          <mat-option [value]="1">Lowest First</mat-option> 
+          <mat-option [value]="2">Highest First</mat-option> 
         </mat-select>
       </mat-form-field>
-
-      
-      <mat-form-field appearance="fill">
-        <mat-label>Sort by Price</mat-label>
-      <mat-select [formControl]="sortBy" multiple>
-        <mat-option [value]="1">Lowest First</mat-option> 
-        <mat-option [value]="2">Highest First</mat-option> 
-      </mat-select>
-    </mat-form-field>
-
-
-      <button mat-raised-button (click)="filter()" >Apply Filters</button>
-<br>
-
-  <!-- End of Sidenav content-->
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <div class="content mat-elevation-z8">
-        <!-- End of Sidenav-->
-
-          <!-- ***Products Card Section ***  -->
-
-          <!-- If no Filters are applied -->
-<div *ngIf="filters.length == 0 ">
-<div *ngFor="let i of products">
-    <div class="product-card">
-      <div class="badge">for you</div>
-            <div class="product-tumb">
-              <img src="{{i.img}}" alt="">
-            </div>
-         <div class="product-details">
-            <span class="product-catagory">{{i.category}}</span>
-             <h2> {{i.name}} </h2>
-             <p>Details about the product</p>
-             <div class="product-bottom-details">
-                
-                <button mat-stroked-button color="warn" (click)="addToCart(i)">Add to Cart</button>
-                <div class="product-price">€{{i.price}}</div>
-             </div>
-        </div>
-    </div>
- </div>
- 
-</div>
-
-
-<!-- If Filters are applied-->
-<div *ngIf="filters.length > 0 ">
-    <div *ngFor="let i of products"> 
-        <div *ngIf=" filters[0].indexOf(i.category) !=-1">
-        <div class="product-card">
-            <div class="badge">for you</div>
-                <div class="product-tumb">
-                    <img src="{{i.img}}" alt="">
-                </div>
-             <div class="product-details">
-                <span class="product-catagory">{{i.category}}</span>
-                 <h2> {{i.name}} </h2>
-                 <p>Details about the product</p>
-                 <div class="product-bottom-details">
-                    <div class="product-price"><small>$960.00</small>${{i.price}}</div>
-                    <button mat-stroked-button color="accent" (click)="addToCart(i)"> Cart</button>
-                 </div>                
-            </div>
-        </div>       
-     </div>    
-   </div>
-</div>
-
-<!-- End of Product Cards Section-->
-
-        <router-outlet></router-outlet>
-        
-      </div>
-     
-    </mat-sidenav-content>
   
-  </mat-sidenav-container>
-  <br><br><br><br><br><br>
+        <button mat-raised-button (click)="filter()" >Apply Filters</button>
+  <br>
+  <br>
+  
+  <form (ngSubmit)="onSubmit($event)">
+    <mat-form-field appearance="fill">
+    <input name="player" value="" matInput>
+  </mat-form-field>
+    <button mat-raised-button class="button" type="submit">Search</button>
+  </form>
+  
+  
+    <!-- End of Sidenav content-->
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <div class="content mat-elevation-z8">
+          <!-- End of Sidenav-->
+  
+            <!-- ***Products Card Section ***  -->
+  
+            <!-- If no Filters are applied -->
+  <div *ngIf="filters.length == 0 ">
+   <div *ngFor="let i of products">
+      <div class="product-card">
+        <div class="badge">for you</div>
+              <div class="product-tumb">
+                <img src="{{i.img}}" alt="">
+              </div>
+            <div class="product-details">
+              <span class="product-catagory">{{i.brand}}</span>
+               <h2> {{i.name}}</h2>
+                <button mat-raised-button matTooltip= "Description : {{i.desc}} Type: {{i.type}}" 
+                 matTooltipClass="custom-tooltip"
+                 aria-label="Button that displays a tooltip when focused or hovered over">About</button>
+               <div class="product-bottom-details">                
+                  <button mat-stroked-button color="warn" (click)="addToCart(i)">Add to Cart</button>
+                  <div class="product-price">€{{i.price}}</div>
+               </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- If Filters are applied-->
+  <div *ngIf="filters.length > 0 ">
+      <div *ngFor="let i of products"> 
+          <div *ngIf=" filters[0].indexOf(i.brand) !=-1">
+            <div class="product-card">
+              <div class="badge">for you</div>
+                    <div class="product-tumb">
+                      <img src="{{i.img}}" alt="">
+                    </div>
+                 <div class="product-details">
+                    <span class="product-catagory">{{i.brand}}</span>
+                     <h2> {{i.name}} </h2>
+                     <button mat-raised-button matTooltip= "{{i.type}} : {{i.desc}}" 
+                     aria-label="Button that displays a tooltip when focused or hovered over">About</button>
+                     <div class="product-bottom-details">                
+                        <button mat-stroked-button color="warn" (click)="addToCart(i)">Add to Cart</button>
+                        <div class="product-price">€{{i.price}}</div>
+                     </div>
+                </div>
+            </div>       
+       </div>    
+     </div>
+  </div>
+  
+  <!-- End of Product Cards Section-->  
+          <router-outlet></router-outlet>         
+        </div>   
+      </mat-sidenav-content>
 
-</body>
+    </mat-sidenav-container>
+    <br><br><br><br><br><br>
+  
+  </body>
+  

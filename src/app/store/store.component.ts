@@ -6,13 +6,14 @@ import { HttpClient } from "@angular/common/http";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogComponent } from "../dialog/dialog.component";
 import { CookieCartService } from "src/shared/cookie-cart.service";
+import { SharedDataService } from "src/shared/shared-data.service";
 import { CookieService } from "ngx-cookie-service";
 
 
 @Component({
   selector: "app-store",
   templateUrl: "./store.component.html",
-  styleUrls: ["./store.component.css", "./navstyle.scss"],
+  styleUrls: ["./store.component.css", "./navstyle.scss", './sty.scss'],
 })
 export class StoreComponent implements OnInit {
   public filters = [];
@@ -25,16 +26,24 @@ export class StoreComponent implements OnInit {
 
   public cartTotal = 0;
 
+  public search : boolean = false;
+
+  public searchedProducts: Array<Item>;
+
+  public LatestProduct : Item;
+
   //When using frop-down you need to use form
   form = new FormControl();
   sortBy = new FormControl();
+  search_box = new FormControl();
 
   constructor(
     private cartService: CartService,
     private http: HttpClient,
     private box: MatDialog,
     private cookie: CookieService,
-    private c: CookieCartService
+    private c: CookieCartService,
+    private share: SharedDataService
   ) {
     //Get Products from API
     this.http
@@ -45,7 +54,7 @@ export class StoreComponent implements OnInit {
       });
     //Get Categories from API
     this.http
-      .get<any>("https://localhost:7005/Products/Categories")
+      .get<any>("https://localhost:7005/Products/Brands")
       .subscribe((data) => {
         this.Categories = data;
       });
@@ -79,6 +88,12 @@ export class StoreComponent implements OnInit {
   }
 
   addToCart(item) {
+
+    this.LatestProduct = item;
+    this.share.LatestItem = this.LatestProduct;
+
+    console.log(this.LatestProduct);
+
     //Store the Total Amount in a Cookie
     let CookieAmount = Number(this.cookie.get("TotalX"));
     let newCookieAmount = CookieAmount + item.price;
@@ -95,7 +110,6 @@ export class StoreComponent implements OnInit {
 
     try {
       y.forEach((e) => {
-        console.log(e);
         myArray.push(e);
       });
     } catch (error) {
@@ -111,8 +125,26 @@ export class StoreComponent implements OnInit {
     this.box.open(DialogComponent);
     setTimeout(() => {
       this.box.closeAll();
-    }, 610);
+      location.reload();
+    }, 26610);
 
-    location.reload();
+    
+  }
+
+  onSubmit(event: any) {
+
+    let x = event.target.player.value.toString();
+    let Payload = {
+      search : x,
+   }
+
+   console.log(Payload);
+    this.http
+    .post<any>("https://localhost:7005/Search", Payload)
+    .subscribe((data) => {
+      this.products = data;
+      console.log(data);
+    });
+
   }
 }

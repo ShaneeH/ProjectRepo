@@ -9,6 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+import { style } from '@angular/animations';
 
 
 
@@ -16,7 +17,7 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  styleUrls: ["./test.component.css", './sty.scss']
 })
 export class TestComponent implements OnInit {
 
@@ -144,6 +145,21 @@ export class TestComponent implements OnInit {
 
 
  }
+
+ onSubmit(event: any) {
+
+  let x = event.target.player.value.toString();
+  let Payload = {
+    search : x,
+ }
+  this.http
+  .post<any>("https://localhost:7005/Search", Payload)
+  .subscribe((data) => {
+    console.log(data);
+  });
+  console.log(typeof(x));
+  return event.target.player.value;
+}
 
  cookies(){
   console.log("Cookie button pressed");
