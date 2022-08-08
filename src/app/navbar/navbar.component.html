@@ -7,13 +7,12 @@
   </head>
   <body>
     <header>     
-        <a class="logo" routerLink=""> <img src="/assets/images/BannerD1.svg" alt="logo"> </a> 
+        <a class="logo" routerLink=""> <img src="/assets/images/banna1.png" alt="logo"> </a> 
         <a *ngIf="auth.user$ | async as user"><img [src]="user.picture" routerLink="profile" alt="User Pic" class="pic" /></a>
       <nav>             
           <ul class="nav__links">
               <li><a routerLink="">Home</a></li>
               <li><a routerLink="store">Store</a></li>
-              <li><a routerLink="test">Test</a></li>
               <!-- ng if for Cart Size data stored in Cookie Storage-->    
               <li *ngIf="cartSize == 0" > <a routerLink="cart"><li><i class='fas fa-shopping-basket' ></i></a></li>
               <li *ngIf="cartSize > 0" > <a routerLink="cart"><li><i class='fas fa-shopping-basket'></i> {{cartSize}}</a></li>

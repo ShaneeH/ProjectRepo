@@ -8,7 +8,6 @@ import { MaterialModule } from '../material.module';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TestComponent } from './test/test.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import {MatButtonModule} from '@angular/material/button';
 import { CookieService } from 'ngx-cookie-service';
@@ -26,7 +25,6 @@ import { ProfileComponent } from './profile/profile.component';
     StoreComponent,
     HomeComponent,
     CartComponent,
-    TestComponent,
     NavbarComponent,
     DialogComponent,
     AdminComponent,

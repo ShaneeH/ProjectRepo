@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AuthService } from "@auth0/auth0-angular";
 import { CookieService } from "ngx-cookie-service";
+import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: "app-navbar",

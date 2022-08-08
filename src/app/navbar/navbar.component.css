@@ -81,7 +81,7 @@ nav {
 .nav__links {
   list-style: none;
   display: flex;
-  font-size: 25px;
+  font-size: 26px;
 }
 
 
@@ -99,7 +99,7 @@ nav {
 
 .nav__links li a:hover {
   color: #0088a9;
-  font-size: 23px;
+  font-size: 28px;
 }
 
 i {

@@ -42,4 +42,57 @@
         <!-- and so on... -->
     </tbody>
 </table>
+<br>
+<h3> As Admin you can add new Products to the Catalog</h3>
+
+<br>
+  <form [formGroup]="ProductForm" (ngSubmit)="createProduct()">
+
+    <mat-form-field appearance="fill">
+        <mat-label for="first-name" >Name : </mat-label>
+        <input matInput id="first-name" type="text" formControlName="name">
+      </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <mat-label for="first-name" >Price : </mat-label>
+        <input matInput id="first-name" type="text" formControlName="price">
+      </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label for="first-name" >Brand : </mat-label>
+        <input matInput id="first-name" type="text" formControlName="brand">
+      </mat-form-field>
+   
+    <mat-form-field appearance="fill">
+        <mat-label for="first-name" >Description : </mat-label>
+        <input matInput id="first-name" type="text" formControlName="desc">
+      </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label for="first-name" >Type : </mat-label>
+        <input matInput id="first-name" type="text" formControlName="type">
+      </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <mat-label for="first-name" >Image : </mat-label>
+        <input matInput id="first-name" type="text" formControlName="img">
+      </mat-form-field>
+    <br>
+
+    <button mat-raised-button color="accent" type="submit">Add Product</button>
+  
+  </form>
+<br>
+
+  <h3> As Admin you can delete a Product by ID</h3>
+  <form [formGroup]="DeleteForm" (ngSubmit)="deleteProduct()">
+    <mat-form-field appearance="fill">
+        <mat-label for="first-name" >Enter Product ID </mat-label>
+        <input matInput id="first-name" type="text" formControlName="id">
+      </mat-form-field>
+      <br>
+      <button mat-raised-button color="accent" type="submit">Delete Product</button>
+  </form>
+  
+ 
 

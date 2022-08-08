@@ -6,6 +6,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { HttpClient } from '@angular/common/http';
 import { Order } from 'src/models/order';
 import { ArgumentOutOfRangeError } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -18,6 +19,21 @@ export class AdminComponent implements OnInit {
   public Orders : Array<Order>;
   public Amount : number;
   public Qty : number;
+
+  
+
+  ProductForm = new FormGroup({
+    name: new FormControl(''),
+    price: new FormControl(''),
+    brand : new FormControl(''),
+    desc : new FormControl(''),
+    type : new FormControl(''),
+    img : new FormControl('')
+  });
+
+  DeleteForm = new FormGroup({
+    id: new FormControl('')
+  });
 
 
   constructor(public cookie: CookieService, public auth: AuthService, private http: HttpClient, private cookieService: CookieService) {
@@ -44,4 +60,29 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
-}
+  createProduct(){
+
+    
+    console.log(this.ProductForm.value);
+     
+    console.log("Button clicked");
+    let url = "https://localhost:7005/Products/Create";
+
+    this.http.post<any>(url ,this.ProductForm.value).subscribe(data => {
+      console.log(data);
+  });
+
+    }
+
+    deleteProduct(){
+      console.log(this.DeleteForm.value);
+      let url = "https://localhost:7005/Product/Delete";
+
+      this.http.post<any>(url ,this.DeleteForm.value).subscribe(data => {
+        console.log(data);
+    });
+
+    }
+  }
+
+

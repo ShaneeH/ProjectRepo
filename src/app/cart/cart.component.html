@@ -8,16 +8,19 @@
 	   <div class="CartContainer">   
 			  <div class="Header">	   	
 			  </div>
-			<div class="EmptyCart" *ngIf="EmptyCart == true">
+			<div class="EmptyCart" *ngIf="CartT == 0">
 			<h1> The Cart is Empty</h1>
 			<img src='assets/images/box.png' alt='image'> 
 		  </div>
 	
-	<div *ngIf="EmptyCart == false;">
-		<button mat-raised-button color="primary"n (click)="clearCart()">empty basket</button>
+	<div *ngIf="CartT > 0;">
+		<button mat-raised-button color="primary" (click)="clearCart()">empty basket</button>
 	<div *ngFor=" let i of Items">     
-		
+
 			  <div class="Cart-Items">
+				<div class="image-box">
+					<img src='{{i.img}}' alt='image'>
+				</div>
 					<div class="about">
 						<h1 class="title">{{i.name}}</h1>
 		

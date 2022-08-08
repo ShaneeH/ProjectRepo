@@ -44,7 +44,7 @@
                 <h1> Recently Released </h1>
                 <h4> View our whole new Range of Smart-Watches  available now </h4>
                 <div class="btn-box">
-                  <a href="" class="btn1"> Shop </a>
+                  <a routerLink="store" class="btn1"> Shop </a>
                 </div>
               </div>
             </div>
@@ -66,10 +66,6 @@
   Welcome Back {{ user.nickname}} 
 </ul>
 
-<ul *ngIf="admin == true">
-<h3>Admin Account</h3>
-</ul>
-
 <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
   <button mat-raised-button color="primary" (click)="auth.logout({ returnTo: document.location.origin })"> Log out </button>
 </ng-container>
@@ -78,24 +74,25 @@
 </ng-template>
 </div>
 <!-- end slider section -->
-<br><br><br>
+<br><br>
 <!-- shop section -->
 <section class="shop_section layout_padding">
   <div class="container">
     <div class="heading_container heading_center">
-      <h2> Latest Smart Phones </h2>
+      <h2> We offer a Wide Range of Apple Products </h2>
+      
     </div>
     <div class="row">
       <div class="col-md-6 ">
         <div class="box">
           <a href="">
             <div class="img-box">
-              <img src="/assets/images/w1.png" alt="">
+              <img src="https://www.backmarket.ie/cdn-cgi/image/format=auto,quality=75,width=1920/https://d1eh9yux7w8iql.cloudfront.net/product_images/512418_45336ede-5be0-4d43-9a27-9dbbe86638e2.jpg" alt="">
             </div>
             <div class="detail-box">
-              <h6> Smartwatch </h6>
-              <h6> Price: <span> $300 </span>
-              </h6>
+              <h2> iPhone 13 Pro </h2>
+              <h2> Price: <span> €1179.99 </span>
+              </h2>
             </div>
             <div class="new">
               <span> Featured </span>
@@ -107,12 +104,12 @@
         <div class="box">
           <a href="">
             <div class="img-box">
-              <img src="/assets/images/w2.png" alt="">
+              <img src="https://www.backmarket.ie/cdn-cgi/image/format=auto,quality=75,width=1920/https://d1eh9yux7w8iql.cloudfront.net/product_images/512341_f20872d3-4223-40c3-aff8-096562145fff.jpg" alt="">
             </div>
             <div class="detail-box">
-              <h6> Smartwatch </h6>
-              <h6> Price: <span> $125 </span>
-              </h6>
+              <h2> iPhone 13 </h2>
+              <h2> Price: <span> €889.99 </span>
+              </h2>
             </div>
             <div class="new">
               <span> New </span>
@@ -124,12 +121,12 @@
         <div class="box">
           <a href="">
             <div class="img-box">
-              <img src="/assets/images/w3.png" alt="">
+              <img src="https://www.backmarket.ie/cdn-cgi/image/format=auto,quality=75,width=640/https://d1eh9yux7w8iql.cloudfront.net/product_images/418119_fd6d2a78-ec74-4f5c-bb5c-e7794bdedeac.jpg" alt="">
             </div>
             <div class="detail-box">
-              <h6> Smartwatch </h6>
-              <h6> Price: <span> $110 </span>
-              </h6>
+              <h2> iPhone 12 </h2>
+              <h2> Price: <span> €729.99 </span>
+              </h2>
             </div>
             <div class="new">
               <span> New </span>
@@ -144,9 +141,9 @@
               <img src="/assets/images/w4.png" alt="">
             </div>
             <div class="detail-box">
-              <h6> Smartwatch </h6>
-              <h6> Price: <span> $145 </span>
-              </h6>
+              <h2> Apple Watch SE </h2>
+              <h2> Price: <span> €145 </span>
+              </h2>
             </div>
             <div class="new">
               <span> New </span>
@@ -161,9 +158,9 @@
               <img src="/assets/images/w5.png" alt="">
             </div>
             <div class="detail-box">
-              <h6> Smartwatch </h6>
-              <h6> Price: <span> $195 </span>
-              </h6>
+              <h2> Apple Watch 7 </h2>
+              <h2> Price: <span> €449.99 </span>
+              </h2>
             </div>
             <div class="new">
               <span> New </span>
@@ -175,12 +172,12 @@
         <div class="box">
           <a href="">
             <div class="img-box">
-              <img src="/assets/images/w6.png" alt="">
+              <img src="https://www.backmarket.ie/cdn-cgi/image/format=auto,quality=75,width=1920/https://d1eh9yux7w8iql.cloudfront.net/product_images/308532_7b427385-34fc-40f5-9e68-73890ed77684.jpg" alt="">
             </div>
             <div class="detail-box">
-              <h6> Smartwatch </h6>
-              <h6> Price: <span> $170 </span>
-              </h6>
+              <h2> Apple AirPods 2 </h2>
+              <h2> Price: <span> €199.99 </span>
+              </h2>
             </div>
             <div class="new">
               <span> New </span>
@@ -192,12 +189,12 @@
         <div class="box">
           <a href="">
             <div class="img-box">
-              <img src="/assets/images/w1.png" alt="">
+              <img src="https://www.backmarket.ie/cdn-cgi/image/format=auto,quality=75,width=1920/https://d1eh9yux7w8iql.cloudfront.net/product_images/None_b2e3984f-5ed8-47fb-86c3-716e95083057.jpg" alt="">
             </div>
             <div class="detail-box">
-              <h6> Smartwatch </h6>
-              <h6> Price: <span> $230 </span>
-              </h6>
+              <h2> Apple AirPods </h2>
+              <h2> Price: <span> €129 </span>
+              </h2>
             </div>
             <div class="new">
               <span> New </span>
@@ -207,7 +204,7 @@
       </div>
     </div>
     <div class="btn-box">
-      <a href=""> View All </a>
+      <a routerLink="store"> View All </a>
     </div>
   </div>
 </section>
@@ -310,6 +307,7 @@
   </div>
 </section>
 <!-- end feature section -->
+
 
 <footer class="footer_section">
   <div class="container">

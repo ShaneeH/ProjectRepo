@@ -88,7 +88,7 @@ export class StoreComponent implements OnInit {
   }
 
   addToCart(item) {
-
+    
     this.LatestProduct = item;
     this.share.LatestItem = this.LatestProduct;
 
@@ -127,6 +127,7 @@ export class StoreComponent implements OnInit {
       this.box.closeAll();
       location.reload();
     }, 26610);
+
 
     
   }

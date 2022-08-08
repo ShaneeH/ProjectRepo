@@ -42,7 +42,7 @@ export class CartComponent implements OnInit {
     this.DisplayTotal = Number(n);
 
     let x = cookie.get('cart_items');
-
+    
     this.Items = JSON.parse(localStorage.getItem('Cart_Items'));
     console.log(this.CartT);
     console.log(this.Total);
@@ -85,9 +85,11 @@ export class CartComponent implements OnInit {
   }
 
   clearCart(){
-    window.localStorage.setItem('Cart_Items', " ");
+    window.localStorage.removeItem('Cart_Items');
     this.EmptyCart = true;
-    this.cookieService.deleteAll()
+    this.cookie.delete('CartX');
+    this.cookie.delete('TotalX');
+    
     
   }
 
@@ -118,6 +120,7 @@ export class CartComponent implements OnInit {
       successUrl: 'https://www.youtube.com/',
       email: this.AuthEmail
     });
+
 
     var Payload = {
       "name" : this.AuthName,
