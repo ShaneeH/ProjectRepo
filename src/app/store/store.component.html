@@ -11,7 +11,7 @@
           <!-- SideNav Content-->  
         <button mat-button class="menu-button" routerLink="/home">
           <mat-icon> category</mat-icon>
-          <span>Filters:</span>fa
+          <span>Product Finder</span>
         </button>
         <mat-divider></mat-divider>
         <mat-form-field appearance="fill">
@@ -22,13 +22,7 @@
         </mat-form-field>
   
         
-        <mat-form-field appearance="fill">
-          <mat-label>Sort by Price</mat-label>
-        <mat-select [formControl]="sortBy" multiple>
-          <mat-option [value]="1">Lowest First</mat-option> 
-          <mat-option [value]="2">Highest First</mat-option> 
-        </mat-select>
-      </mat-form-field>
+
   
         <button mat-raised-button (click)="filter()" >Apply Filters</button>
   <br>

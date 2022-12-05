@@ -7,6 +7,7 @@ import {render} from 'creditcardpayments/creditCardPayments'
 import { AuthService } from '@auth0/auth0-angular';
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -14,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CartComponent implements OnInit {
 
-  
+ 
 
   public CartT : number;
   public Total : number;
@@ -89,7 +90,7 @@ export class CartComponent implements OnInit {
     this.EmptyCart = true;
     this.cookie.delete('CartX');
     this.cookie.delete('TotalX');
-    
+
     
   }
 
@@ -169,6 +170,15 @@ export class CartComponent implements OnInit {
        
       window.document.body.appendChild(s);
     }
+  }
+
+  emailTest(){
+    //These are the Variables that will be sent to the Backend
+    let name = this.AuthName;
+    let email = this.AuthEmail;
+
+    
+
   }
 
 }

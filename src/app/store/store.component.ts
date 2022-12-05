@@ -8,6 +8,7 @@ import { DialogComponent } from "../dialog/dialog.component";
 import { CookieCartService } from "src/shared/cookie-cart.service";
 import { SharedDataService } from "src/shared/shared-data.service";
 import { CookieService } from "ngx-cookie-service";
+import { Observable, Subject } from 'rxjs';
 
 
 @Component({
@@ -16,6 +17,8 @@ import { CookieService } from "ngx-cookie-service";
   styleUrls: ["./store.component.css", "./navstyle.scss", './sty.scss'],
 })
 export class StoreComponent implements OnInit {
+  public cartSubject = new Subject<any>();
+
   public filters = [];
   public Sort = [];
   public itemName;
@@ -121,6 +124,8 @@ export class StoreComponent implements OnInit {
     document.cookie = `cart_size = ${this.cartService.CartData.length}`;
     this.cartTotal = this.cartTotal + item.price;
     document.cookie = `cart_total = ${this.cartTotal}`;
+
+
 
     this.box.open(DialogComponent);
     setTimeout(() => {

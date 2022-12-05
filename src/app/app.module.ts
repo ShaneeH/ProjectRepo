@@ -16,6 +16,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { AdminComponent } from './admin/admin.component';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { ProfileComponent } from './profile/profile.component';
+import { BasketComponent } from './basket/basket.component';
 
 
 
@@ -29,6 +30,7 @@ import { ProfileComponent } from './profile/profile.component';
     DialogComponent,
     AdminComponent,
     ProfileComponent,
+    BasketComponent,
   
   ],
   imports: [

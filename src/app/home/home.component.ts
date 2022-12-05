@@ -17,9 +17,9 @@ export class HomeComponent implements OnInit {
     //Check for what Role the User is
     this.auth.user$.subscribe(s => { 
          if(s['role'] == 'admin'){
-            console.log("You are admin");
             this.admin = true;
          }
+         console.log(s);
      });
         
    } 
