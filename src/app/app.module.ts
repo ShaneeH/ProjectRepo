@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { StoreComponent } from './store/store.component';
 import { MaterialModule } from '../material.module';
 import { HomeComponent } from './home/home.component';
-import { CartComponent } from './cart/cart.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from '@auth0/auth0-angular';
 import {MatButtonModule} from '@angular/material/button';
@@ -25,7 +24,6 @@ import { BasketComponent } from './basket/basket.component';
     AppComponent,
     StoreComponent,
     HomeComponent,
-    CartComponent,
     NavbarComponent,
     DialogComponent,
     AdminComponent,
