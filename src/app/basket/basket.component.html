@@ -1,8 +1,5 @@
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></script>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <div class="pb-5">
@@ -42,7 +39,7 @@
                         </div>
                       </div>
                     </th>
-                    <td class="border-0 align-middle"><strong>${{i.price}}</strong></td>
+                    <td class="border-0 align-middle"><strong>€{{i.price}}</strong></td>
                     <td class="border-0 align-middle"><strong>{{i.qty}}</strong></td>
                     <td class="border-0 align-middle"><strong>
                     <button mat-mini-fab color="primary" (click)="increase(i)">
@@ -53,7 +50,7 @@
                       </button>
 
                 </strong>
-                <td class="border-0 align-middle"><strong>${{i.qty * i.price}}</strong></td>
+                <td class="border-0 align-middle"><strong>€{{i.qty * i.price}}</strong></td>
                     <td class="border-0 align-middle"><button mat-mini-fab color="primary" (click)="remove(i)">
                         <mat-icon>clear</mat-icon>
                       </button></td>
@@ -69,15 +66,28 @@
         <div class="row py-5 p-4 bg-white rounded shadow-sm">
           <div class="col-lg-6">
             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+
+            <form [formGroup]="promoCode" (ngSubmit)="addPromo()">
             <div class="p-4">
               <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
               <div class="input-group mb-4 border rounded-pill p-2">
-                <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
+                <input id="code" type="text" formControlName="code" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
                 <div class="input-group-append border-0">
-                  <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+                    <button id="button-addon3"  type="submit" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
                 </div>
               </div>
+              <div *ngIf="promo_active == true">
+                <h2>Nice shipping is on us </h2>
+              </div>
+
+              <div *ngIf="promo_invalid == true">
+                <h2>oops that code dosent seem to work !</h2>
+              </div>
+              
             </div>
+            
+        </form>
+
             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
             <div class="p-4">
               <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
@@ -89,13 +99,13 @@
             <div class="p-4">
               <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
               <ul class="list-unstyled mb-4">
-                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$390.00</strong></li>
-                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>
-                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
+                
+                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>€{{shipping}}</strong></li>
+                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax 10%</strong><strong>€{{total * 0.10}}</strong></li>
                 <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                  <h5 class="font-weight-bold">${{total}}</h5>
+                  <h2 class="font-weight-bold">€{{total * 1.10 + shipping}}</h2>
                 </li>
-              </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+              </ul><a  class="btn btn-primary rounded-pill py-2 btn-block" (click)="checkout()">Procceed to checkout</a>
             </div>
           </div>
         </div>

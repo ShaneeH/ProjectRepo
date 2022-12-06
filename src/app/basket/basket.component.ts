@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from 'src/models/item';
 import { Item_cart } from 'src/models/item_cart';
-
+import {FormControl, FormGroup} from '@angular/forms';
+import { AuthService } from '@auth0/auth0-angular';
+import { getLocaleDateFormat } from '@angular/common';
 
 @Component({
   selector: 'app-basket',
@@ -15,11 +17,28 @@ export class BasketComponent implements OnInit {
   products_Filtered : [] = [];
   unique : [] = [];
   total : number = 0;
+  shipping : number = 10;
   _value : number = 1;
+  promo_active : boolean = false;
+  promo_invalid : boolean = false;
+  user_email : string;
+  user_name : string;
+
 
   display_products : Item_cart[] = [];
 
-  constructor() { 
+  promoCode = new FormGroup({
+    code: new FormControl('')
+  });
+
+  constructor(public auth: AuthService) { 
+
+    this.auth.user$.subscribe(s => { 
+      this.user_email = s.email;
+      this.user_name = s.nickname;
+
+      console.log(s);
+  });
 
     let myArray = [];
     let y = JSON.parse(window.localStorage.getItem("Cart_Items"));
@@ -105,8 +124,37 @@ export class BasketComponent implements OnInit {
     window.localStorage.setItem("Cart_Items", JSON.stringify(this.products));
   }
 
-  hey(){
-    console.log("ye");
+  addPromo(){
+    let promo = this.promoCode.get('code').value;
+
+    if(promo == 'xmas22'){
+       this.shipping = 0;
+       this.promo_active = true;
+       this.promo_invalid = false;
+    } else {
+       this.shipping = this.shipping;
+       this.promo_invalid = true;
+       this.promo_active = false;
+    }
+  }
+
+  checkout(){
+    let total_amount = this.total * 1.10 + this.shipping;
+    console.log(total_amount);
+    console.log("checkout");
+
+    //Getting Attributes for the JSON Payload to sent to the backend
+    //For The Emailing Service
+    var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+
+    var payload = {
+      'total': total_amount,
+      'email': this.user_email,
+      'name' : this.user_name,
+      'date' : utc
+    }
+
+    console.log(payload);
   }
 
 }
