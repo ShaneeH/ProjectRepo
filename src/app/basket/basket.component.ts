@@ -23,6 +23,7 @@ export class BasketComponent implements OnInit {
   promo_invalid : boolean = false;
   user_email : string;
   user_name : string;
+  Banner : boolean = true;
 
 
   display_products : Item_cart[] = [];
@@ -104,6 +105,10 @@ export class BasketComponent implements OnInit {
     }
   }
 
+  banner(){
+    this.Banner = false;
+  }
+
   decrease(i : Item_cart){
     i.qty = i.qty - 1;
 
@@ -139,7 +144,11 @@ export class BasketComponent implements OnInit {
   }
 
   checkout(){
+
+
+
     let total_amount = this.total * 1.10 + this.shipping;
+    localStorage.setItem('final_amount', total_amount.toString());
     console.log(total_amount);
     console.log("checkout");
 
@@ -154,7 +163,6 @@ export class BasketComponent implements OnInit {
       'date' : utc
     }
 
-    console.log(payload);
   }
 
 }
