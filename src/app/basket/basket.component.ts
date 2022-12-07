@@ -29,6 +29,8 @@ export class BasketComponent implements OnInit {
 
 
   display_products : Item_cart[] = [];
+  display_products_final : Item_cart[] = [];
+
 
   promoCode = new FormGroup({
     code: new FormControl('')
@@ -148,9 +150,6 @@ export class BasketComponent implements OnInit {
   }
 
   checkout(){
-
-
-
     let total_amount = this.total * 1.10 + this.shipping;
     localStorage.setItem('final_amount', total_amount.toString());
     console.log(total_amount);
@@ -175,6 +174,24 @@ export class BasketComponent implements OnInit {
       this.box.closeAll();
       location.reload();
     }, 266100);
+
+    //Object Factory Create Items with 'Qty' added
+    //We Need this to send back to the API  
+    for(let i = 0; i < this.display_products.length; i++){
+      var obj : Item_cart  = {
+        name : this.display_products[i].name,
+        price : this.display_products[i].price,
+        brand: this.display_products[i].brand,
+        desc: this.display_products[i].desc,
+        type: this.display_products[i].type,
+        img: this.display_products[i].img,
+        qty : this.display_products[i].qty
+      }
+        this.display_products_final.push(obj);
+}
+
+     window.localStorage.setItem('basket_final' , JSON.stringify(this.display_products_final));
+
 
   }
 

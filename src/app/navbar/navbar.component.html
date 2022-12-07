@@ -16,7 +16,7 @@
               <li><a routerLink="">Home</a></li>
               <li><a routerLink="store">Shop</a></li>
               <li><a routerLink="basket"><i class='fas fa-shopping-basket' ></i></a></li>
-              <li><a routerLink="admin"><i class='fa fa-address-card' ></i></a></li>                     
+              <li *ngIf="admin == true" ><a  routerLink="admin"><i class='fa fa-address-card' ></i></a></li>                     
           </ul>
       </nav>  
   </header>

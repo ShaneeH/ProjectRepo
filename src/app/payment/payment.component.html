@@ -9,6 +9,8 @@
 </head>
 
 <body>
+    <button type="submit" class="btn btn-default" (click)="test_json()">Test</button>
+
     <!-- START OF CREDIT CARD INPUT FORM -->
 <form [formGroup]="form" (ngSubmit)="confirm_purchase()">
   
@@ -19,69 +21,55 @@
             <div class="payment">
                 
                     <!-- Address Box-->
-                    <div class="form-group Address">
-                        
+                    <div class="form-group Address">         
                         <label for="owner">Address</label>
                         <input type="text" class="form-control" formControlName="address">
-           
                     </div>
 
-                     <!-- Country Menu Box-->
-                    <div class="form-group CVV2">
+                    <!-- Country Menu Box-->
+                      <div class="form-group CVV2">
                         <label>Country</label>
                         <select id="country" formControlName="country" >
-                            <option value="Ireland">Ireland</option>
-                            <option value="UK">UK</option>
+                        <option value="Ireland">Ireland</option>
+                        <option value="UK">UK</option>
                         </select>
                     </div>
 
-                     <!-- Credit Card Name Box-->
-                    <div class="form-group owner">                      
-                        <label for="owner">Name on Card</label>
-                        <input type="text" class="form-control"  formControlName="card_name">
-                    </div>
+                        <!-- Credit Card Name Box-->
+                        <div class="form-group owner">                      
+                            <label for="owner">Name on Card</label>
+                            <input type="text" class="form-control"  formControlName="cardName">
+                        </div> 
 
-                    <!-- Credit Card Number Box -->
-                    <div class="form-group" id="card-number-field" formControlName="card_no">
-                         <label for="cardNumber">Card Number</label>
-                         <input type="number" class="form-control" id="card_no">
-                   </div>        
+                            <!-- Credit Card Number Box-->
+                            <div class="form-group owner">                      
+                                <label for="owner">Card Number</label>
+                                <input type="number" class="form-control"  formControlName="cardNo">
+                            </div> 
 
-                    <!-- CVV Box-->
-                    <div class="form-group CVV">
-                        <label for="cvv">CVV</label>
-                        <input type="number" class="form-control" id="cvv" formControlName="cvv">
-                    </div>
+                        <!-- CVV Box-->
+                        <div class="form-group CVV">
+                            <label for="cvv">CVV</label>
+                            <input type="number" class="form-control" id="cvv" formControlName="cvv">
+                        </div>                        
 
+                        <!-- Expire Year -->
+                        <div class="form-group CVV2">
+                            <label>Year</label>
+                            <select id="country" formControlName="expireYear" >
+                            <option value="Ireland">2022</option>
+                            <option value="UK">2023</option>
+                            </select>
+                        </div>
 
-
-                    <!-- Expire Month Box -->
-                    <div class="form-group" id="expire_month" formControlName="expire_month">
-                        <label>Expiration Date</label>
-                        <select required id="expire_month">
-                            <option value="January">January</option>
-                            <option value="February">February </option>
-                            <option value="March">March</option>
-                            <option value="April">April</option>
-                            <option value="05">May</option>
-                            <option value="06">June</option>
-                            <option value="07">July</option>
-                            <option value="08">August</option>
-                            <option value="09">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                        </select>
-
-                        <!-- Expire Year Box -->
-                        <select required id="expire_year" formControlName="expire_year">
-                            <option value="16"> 2022</option>
-                            <option value="17"> 2023</option>
-                            <option value="18"> 2024</option>
-                            <option value="19"> 2025</option>
-                            <option value="20"> 2026</option>
-                        </select>
-                    </div>
+                        <div class="form-group CVV2">
+                            <label>Month</label>
+                            <select id="country" formControlName="expireMonth" >
+                            <option value="Ireland">2022</option>
+                            <option value="UK">2023</option>
+                            </select>
+                        </div>
+      
 
                     <div class="form-group" id="credit_cards">
                         <img src="/assets/images/visa.jpg" id="visa">
@@ -89,13 +77,13 @@
                         <img src="/assets/images/amex.jpg" id="amex">                    
                     </div>
                     <div class="form-group" id="pay-now">
-                        <button type="submit" class="btn btn-default" [disabled]="!form.valid" id="confirm-purchase">PAY €{{total}}</button>
+                        <button type="submit" class="btn btn-default" [disabled]="!form.valid" id="confirm-purchase">PAY {{Total}}</button>
                     </div>    
             </div>
         </div>
   </form>
 
-  
+
 
         <!-- END OF CREDIT CARD INPUT FORM -->
 
