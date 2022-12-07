@@ -3,7 +3,9 @@ import { Item } from 'src/models/item';
 import { Item_cart } from 'src/models/item_cart';
 import {FormControl, FormGroup} from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
-import { getLocaleDateFormat } from '@angular/common';
+import { MatDialog } from "@angular/material/dialog";
+import { PaymentComponent } from '../payment/payment.component';
+
 
 @Component({
   selector: 'app-basket',
@@ -32,7 +34,9 @@ export class BasketComponent implements OnInit {
     code: new FormControl('')
   });
 
-  constructor(public auth: AuthService) { 
+  constructor(public auth: AuthService, private box: MatDialog,) { 
+
+
 
     this.auth.user$.subscribe(s => { 
       this.user_email = s.email;
@@ -162,6 +166,15 @@ export class BasketComponent implements OnInit {
       'name' : this.user_name,
       'date' : utc
     }
+
+    //Open up the Payment Platform
+    //This is Timed so will close after a set amount of time
+
+    this.box.open(PaymentComponent);
+    setTimeout(() => {
+      this.box.closeAll();
+      location.reload();
+    }, 266100);
 
   }
 
