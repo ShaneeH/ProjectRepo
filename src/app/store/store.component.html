@@ -55,9 +55,7 @@
             <div class="product-details">
               <span class="product-catagory">{{i.brand}}</span>
                <h2> {{i.name}}</h2>
-                <button mat-raised-button matTooltip= "Description : {{i.desc}} Type: {{i.type}}" 
-                 matTooltipClass="custom-tooltip"
-                 aria-label="Button that displays a tooltip when focused or hovered over">About</button>
+               <button mat-raised-button  [routerLink]="['/product', i.id]">View More</button>
                <div class="product-bottom-details">                
                   <button mat-stroked-button color="warn" (click)="addToCart(i)">Add to Cart</button>
                   <div class="product-price">€{{i.price}}</div>
@@ -80,8 +78,8 @@
                  <div class="product-details">
                     <span class="product-catagory">{{i.brand}}</span>
                      <h2> {{i.name}} </h2>
-                     <button mat-raised-button matTooltip= "{{i.type}} : {{i.desc}}" 
-                     aria-label="Button that displays a tooltip when focused or hovered over">About</button>
+                     <button mat-raised-button  [routerLink]="['/product', i.id]">View More</button>
+                   
                      <div class="product-bottom-details">                
                         <button mat-stroked-button color="warn" (click)="addToCart(i)">Add to Cart</button>
                         <div class="product-price">€{{i.price}}</div>

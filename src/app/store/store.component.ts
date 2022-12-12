@@ -64,7 +64,7 @@ export class StoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("ng on init");
+   
   }
 
   filter() {

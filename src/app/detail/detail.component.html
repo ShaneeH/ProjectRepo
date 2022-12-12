@@ -1,0 +1,59 @@
+
+<body>
+    <main>
+        <div *ngFor="let i of products">
+      <div class="card">
+        <div class="card__title">
+          <div class="icon" >
+            <a ><i class="fa fa-arrow-left"></i></a>
+          </div>
+          <h3></h3>
+        </div>
+        <div class="card__body">
+          <div class="half">
+            <div class="featured_text">
+              <h1>{{i.brand}}</h1>
+              <p class="sub">{{i.name}}</p>
+              <p class="price">${{i.price}}</p>
+            </div>
+            <div class="image">
+              <img src={{i.img}} alt="">
+            </div>
+          </div>
+          <div class="half">
+            <div class="description">
+                <h2><br></h2>
+                <h2><br></h2>
+                <h2><br></h2>
+                <h2><br></h2>
+
+
+              <h2>{{i.desc}}</h2>
+            </div>
+            <span class="stock"><i class="fa fa-pen"></i> In stock</span>
+            <div class="reviews">
+              <ul class="stars">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star-o"></i></li>
+              </ul>
+              <span>(64 reviews)</span>
+            </div>
+          </div>
+        </div>
+        <div class="card__footer">
+          <div class="recommend">
+            <p>Product Type</p>
+            <h3>{{i.type}}</h3>
+          </div>
+          <div class="action">
+            <button type="button">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </main>
+  </body>
+  

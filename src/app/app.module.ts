@@ -17,6 +17,8 @@ import { NgxPayPalModule } from 'ngx-paypal';
 import { ProfileComponent } from './profile/profile.component';
 import { BasketComponent } from './basket/basket.component';
 import { PaymentComponent } from './payment/payment.component';
+import { DetailComponent } from './detail/detail.component';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -31,6 +33,8 @@ import { PaymentComponent } from './payment/payment.component';
     ProfileComponent,
     BasketComponent,
     PaymentComponent,
+    DetailComponent,
+    ErrorComponent,
   
   ],
   imports: [

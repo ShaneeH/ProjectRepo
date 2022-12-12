@@ -53,8 +53,8 @@ export class PaymentComponent implements OnInit {
      let user_email = this.Email;
      let total = this.Total;
  
-         //The JSON with the Items from the Users Basket
-         let x = localStorage.getItem('basket_final');
+    //The JSON with the Items from the Users Basket
+    let x = localStorage.getItem('basket_final');
 
  
      let j = {
@@ -68,7 +68,7 @@ export class PaymentComponent implements OnInit {
            "firstname": this.Name,
            "date": "05/12/2022",
            "address" : "mala",
-           "total": total,
+           "total": total.toFixed(2),
            "items": JSON.parse(x)
        },
        "headers": {
@@ -83,7 +83,7 @@ export class PaymentComponent implements OnInit {
     headers: new HttpHeaders({
       'accept' : 'application/json',
       'Content-Type':  'application/json',
-       'api-key': 'Enter Api Key Here'
+       'api-key': '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'
 
     })
   };

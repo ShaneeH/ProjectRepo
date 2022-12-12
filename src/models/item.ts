@@ -6,6 +6,7 @@ export class Item{
     desc: string;
     type: string;
     img: string;
+    id: number;
    
 
     //Make sure to add Description
