@@ -19,8 +19,9 @@ export class AdminComponent implements OnInit {
   public Orders : Array<Order>;
   public Amount : number;
   public Qty : number;
+  public Admin : Boolean;
 
-  
+
 
   ProductForm = new FormGroup({
     name: new FormControl(''),
@@ -37,6 +38,15 @@ export class AdminComponent implements OnInit {
 
 
   constructor(public cookie: CookieService, public auth: AuthService, private http: HttpClient, private cookieService: CookieService) {
+          //Check for what Role the User is
+          this.auth.user$.subscribe(s => { 
+            if(s['role'] == 'admin'){
+               this.Admin = true;
+            }
+            console.log(s);
+        });
+
+
     let url = "https://localhost:7005/Orders/All";
     this.http.get<any>(url).subscribe(data =>{
       this.Orders = data;

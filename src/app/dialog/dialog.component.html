@@ -5,28 +5,32 @@
   <h2> (: </h2>
   </div>
   
-  <!-- If the User Picks a Phone this will code will Fire-->
+  <!-- If the User Picks a Phone this code will Fire-->
   <div *ngIf="Reccomend == true">
-      <h1>Item added to Cart</h1>
-      <h2> (: </h2>
-      <h3>We have something that will do great with the {{LatestItem.name}} </h3>
+      <h1>{{LatestItem.name}}</h1>
+      <p>added to Cart 😇</p>
+      <h2>we have something that will do great with the {{LatestItem.name}} </h2>
+      <div class="price">
+        €{{RandomItem.price}}   
+      </div>
       <div class="wrapper">
           <div class="container">
             <div class="top">
-              <img src="{{RandomItem.img}}" alt="">
+              <a [routerLink]="['/product', RandomItem.id]"> <img src="{{RandomItem.img}}" alt=""> </a>
             </div>
             <div class="bottom">
               <div class="left">
                 <div class="details">
-                  <h1>{{RandomItem.name}}</h1>
-                  <p>{{RandomItem.price}}</p>
+                  {{RandomItem.name}}     
                 </div>
-                <div class="buy"><i class="material-icons">add_shopping_cart</i></div>
+                <div class="buy">
+                  <i class="material-icons" (click)="hey()" >add_shopping_cart</i>
+                </div>
               </div>
               <div class="right">
                 <div class="done"><i class="material-icons">done</i></div>
                 <div class="details">
-                  <h1>{{RandomItem.name}}</h1>
+                  {{RandomItem.name}}
                   <p>Added to your cart</p>
                 </div>
                 <div class="remove"><i class="material-icons">clear</i></div>

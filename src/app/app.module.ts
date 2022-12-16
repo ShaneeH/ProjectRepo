@@ -19,6 +19,7 @@ import { BasketComponent } from './basket/basket.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DetailComponent } from './detail/detail.component';
 import { ErrorComponent } from './error/error.component';
+import { CompletedComponent } from './completed/completed.component';
 
 
 
@@ -35,6 +36,7 @@ import { ErrorComponent } from './error/error.component';
     PaymentComponent,
     DetailComponent,
     ErrorComponent,
+    CompletedComponent,
   
   ],
   imports: [

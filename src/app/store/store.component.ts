@@ -74,11 +74,10 @@ export class StoreComponent implements OnInit {
     //const result : string[] = [];
     let b: string = this.form.value.toString();
     this.filters.push(b); //Filters is an array
-    console.log(b);
+   
 
     //This will reset the view if they have no options picked
     if (b.length < 1) {
-      console.log("i is less than 2");
       this.filters.length = 0;
     }
 
@@ -86,16 +85,13 @@ export class StoreComponent implements OnInit {
     this.Sort.length = 0;
     let c: string = this.sortBy.value.toString();
     this.Sort.push(c);
-    console.log("Sort by:", c);
-    console.log("Yoo");
+
   }
 
   addToCart(item) {
     
     this.LatestProduct = item;
     this.share.LatestItem = this.LatestProduct;
-
-    console.log(this.LatestProduct);
 
     //Store the Total Amount in a Cookie
     let CookieAmount = Number(this.cookie.get("TotalX"));
@@ -144,12 +140,11 @@ export class StoreComponent implements OnInit {
       search : x,
    }
 
-   console.log(Payload);
     this.http
     .post<any>("https://localhost:7005/Search", Payload)
     .subscribe((data) => {
       this.products = data;
-      console.log(data);
+  
     });
 
   }

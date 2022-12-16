@@ -14,7 +14,7 @@
             <div class="featured_text">
               <h1>{{i.brand}}</h1>
               <p class="sub">{{i.name}}</p>
-              <p class="price">${{i.price}}</p>
+              <p class="price">€{{i.price}}</p>
             </div>
             <div class="image">
               <img src={{i.img}} alt="">
@@ -49,7 +49,7 @@
             <h3>{{i.type}}</h3>
           </div>
           <div class="action">
-            <button type="button">Add to cart</button>
+            <button type="button" (click)="addToCart(i)">Add to cart</button>
           </div>
         </div>
       </div>

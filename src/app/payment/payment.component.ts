@@ -7,6 +7,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { HttpHeaders } from '@angular/common/http';
 
 
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -83,7 +84,7 @@ export class PaymentComponent implements OnInit {
     headers: new HttpHeaders({
       'accept' : 'application/json',
       'Content-Type':  'application/json',
-       'api-key': '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'
+       'api-key': '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'
 
     })
   };
@@ -133,6 +134,8 @@ export class PaymentComponent implements OnInit {
  
    console.log(x);
    console.log(JSON.stringify(j));
+
+
 
 
 

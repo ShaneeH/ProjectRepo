@@ -40,15 +40,17 @@
       }
       .left{
         height:100%;
-        width: 50%;
+        width: 55%;
         background: #f4f4f4;
         position:relative;
         float:left;
         .details{
-          padding: 20px;
+          padding: 24px;
           float: left;
-          width: calc(70% - 40px);
+          width: calc(80% - 50px);
+          font-size: 25px;
         }
+
         .buy{
           float:right;
           width: calc(30% - 2px);

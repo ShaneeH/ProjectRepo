@@ -7,6 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { BasketComponent } from './basket/basket.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DetailComponent } from './detail/detail.component';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   {path : 'basket' , component: BasketComponent},
   {path : 'payment' , component: PaymentComponent},
-  { path: 'product/:id', component: DetailComponent }
+  { path: 'product/:id', component: DetailComponent },
+  { path: '**', component: ErrorComponent },
+
 ];
 
 @NgModule({

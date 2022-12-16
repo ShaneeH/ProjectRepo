@@ -42,4 +42,8 @@ export class DialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  hey(){
+    console.log("yo");
+  }
+
 }

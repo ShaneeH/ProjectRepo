@@ -17,14 +17,11 @@
         <mat-form-field appearance="fill">
           <mat-label>Brands</mat-label>
           <mat-select [formControl]="form" multiple>
-            <mat-option *ngFor="let t of Categories" [value]="t ">{{t}}</mat-option>
+            <mat-option *ngFor="let i of Categories" [value]="i ">{{i}}</mat-option>
           </mat-select>
         </mat-form-field>
   
-        
-
-  
-        <button mat-raised-button (click)="filter()" >Apply Filters</button>
+        <button mat-raised-button (click)="filter()" >Apply</button>
   <br>
   <br>
   
@@ -50,14 +47,14 @@
       <div class="product-card">
         <div class="badge">for you</div>
               <div class="product-tumb">
-                <img src="{{i.img}}" alt="">
+                <a [routerLink]="['/product', i.id]"> <img src="{{i.img}}" alt=""></a>
               </div>
             <div class="product-details">
               <span class="product-catagory">{{i.brand}}</span>
-               <h2> {{i.name}}</h2>
-               <button mat-raised-button  [routerLink]="['/product', i.id]">View More</button>
+               <h1> {{i.name}}</h1>
+              
                <div class="product-bottom-details">                
-                  <button mat-stroked-button color="warn" (click)="addToCart(i)">Add to Cart</button>
+                  <button mat-stroked-button color="primary" (click)="addToCart(i)">Add to Cart</button>
                   <div class="product-price">€{{i.price}}</div>
                </div>
           </div>
@@ -73,15 +70,15 @@
             <div class="product-card">
               <div class="badge">for you</div>
                     <div class="product-tumb">
-                      <img src="{{i.img}}" alt="">
+                      <a [routerLink]="['/product', i.id]"> <img src="{{i.img}}" alt=""></a>
                     </div>
                  <div class="product-details">
                     <span class="product-catagory">{{i.brand}}</span>
-                     <h2> {{i.name}} </h2>
-                     <button mat-raised-button  [routerLink]="['/product', i.id]">View More</button>
+                    <h1> {{i.name}}</h1>
+                   
                    
                      <div class="product-bottom-details">                
-                        <button mat-stroked-button color="warn" (click)="addToCart(i)">Add to Cart</button>
+                        <button mat-stroked-button color="primary" (click)="addToCart(i)">Add to Cart</button>
                         <div class="product-price">€{{i.price}}</div>
                      </div>
                 </div>
