@@ -1,7 +1,7 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<div *ngIf="Banner == true">
+<div *ngIf="Banner == true && basket_size > 0"  >
     <div class="banner">
       <div class="banner__content">
         <div class="banner__text">
@@ -15,6 +15,21 @@
       </div>
     </div>
     </div>
+
+    <div *ngIf="basket_size ==  0"  >
+      <div class="banner">
+        <div class="banner__content">
+          <div class="banner__text">
+            <strong>Basket empty:</strong>Head over to our shop and browse our products
+          </div>
+          <button class="banner__close" type="button" (click)="banner()">
+            <span class="material-icons">
+              close
+            </span>
+          </button>
+        </div>
+      </div>
+      </div>
 
     <div class="pb-5">
       <div class="container">

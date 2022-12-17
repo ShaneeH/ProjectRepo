@@ -21,17 +21,25 @@ export class BasketComponent implements OnInit {
   total : number = 0;
   shipping : number = 10;
   _value : number = 1;
+  basket_size : number = 0;
+  total_fixed : number = 0;
+
+
+  //Promo Variables
   promo_active : boolean = false;
   promo_invalid : boolean = false;
-  user_email : string;
-  user_name : string;
   Banner : boolean = true;
 
-
+  user_email : string;
+  user_name : string;
+  
+  //This is the Array for the Products
   display_products : Item_cart[] = [];
+
+  //This is the Array with the Quantites set by the user
   display_products_final : Item_cart[] = [];
 
-
+  //Form for User Entered Promo Code
   promoCode = new FormGroup({
     code: new FormControl('')
   });
@@ -39,15 +47,14 @@ export class BasketComponent implements OnInit {
   constructor(public auth: AuthService, private box: MatDialog,) { 
 
 
-
+    //Get the Users Information from the Auth0 Service 
     this.auth.user$.subscribe(s => { 
       this.user_email = s.email;
       this.user_name = s.nickname;
-
-      console.log(s);
   });
 
-    let myArray = [];
+
+  //Get the Products from the Local Storage
     let y = JSON.parse(window.localStorage.getItem("Cart_Items"));
 
     try {
@@ -56,6 +63,7 @@ export class BasketComponent implements OnInit {
       });
     } catch (error) {  console.log(error);}
 
+    //We need to remove Duplicates of the Same Products from the Array
     var uniqueIds: any[] = [];
 
     var unique = this.products.filter(element => {
@@ -74,6 +82,7 @@ export class BasketComponent implements OnInit {
   this.products = unique;
 
   //Object Factory for Products to go into the Display Array
+  
   for(let i = 0; i < this.products.length; i++){
         var obj : Item_cart = {
           name : this.products[i].name,
@@ -88,19 +97,31 @@ export class BasketComponent implements OnInit {
   }
 
 
+  //To get the Total amount of the Basket
+  //We loop though the array of products and the price of them to the 'Total' Variable
   for(let i = 0; i < this.display_products.length; i++){
         let z = this.display_products[i].price * this.display_products[i].qty;
          this.total = this.total + z;
+         this.total = Number(this.total.toPrecision(4));
   }
 
-  console.log(this.total);
+      this.total = Number(this.total.toPrecision(4));
 
-    
+      
+    this.basket_size = this.display_products.length;
+
+    let total_final = this.total * 1.10 + 10;
+    this.total_fixed = Number(total_final.toPrecision(4));
+   
+     
   }
 
   ngOnInit(): void {
+
+
   }
 
+  //The Maxm Qty amount a User can have of one item is 10
   increase(i : Item_cart){
     i.qty = i.qty + 1;
     this.total = this.total + i.price;
@@ -111,11 +132,14 @@ export class BasketComponent implements OnInit {
     }
   }
 
+  
   banner(){
+  // This value activates the Promo Banner on the page
     this.Banner = false;
   }
 
   decrease(i : Item_cart){
+    //We cant let the Qty of a product be less than 0 
     i.qty = i.qty - 1;
 
     if(i.qty >= 1){
@@ -136,9 +160,11 @@ export class BasketComponent implements OnInit {
   }
 
   addPromo(){
+    //This is where the User can get a discount
+
     let promo = this.promoCode.get('code').value;
 
-    if(promo == 'xmas22'){
+    if(promo == 'santa'){
        this.shipping = 0;
        this.promo_active = true;
        this.promo_invalid = false;
@@ -150,10 +176,10 @@ export class BasketComponent implements OnInit {
   }
 
   checkout(){
+    //This is to calculate shipping costs and other costs
     let total_amount = this.total * 1.10 + this.shipping;
     localStorage.setItem('final_amount', total_amount.toString());
-    console.log(total_amount);
-    console.log("checkout");
+
 
     //Getting Attributes for the JSON Payload to sent to the backend
     //For The Emailing Service
@@ -176,7 +202,9 @@ export class BasketComponent implements OnInit {
     }, 266100);
 
     //Object Factory Create Items with 'Qty' added
-    //We Need this to send back to the API  
+    //We Need this to send back to the API 
+    //This JSON Object will the be used for the Emailing Service API
+
     for(let i = 0; i < this.display_products.length; i++){
       var obj : Item_cart  = {
         name : this.display_products[i].name,

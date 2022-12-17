@@ -8,6 +8,7 @@ import { BasketComponent } from './basket/basket.component';
 import { PaymentComponent } from './payment/payment.component';
 import { DetailComponent } from './detail/detail.component';
 import { ErrorComponent } from './error/error.component';
+import { CompletedComponent } from './completed/completed.component';
 
 const routes: Routes = [
   
@@ -18,8 +19,9 @@ const routes: Routes = [
   {path : 'basket' , component: BasketComponent},
   {path : 'payment' , component: PaymentComponent},
   { path: 'product/:id', component: DetailComponent },
-  { path: '**', component: ErrorComponent },
-
+  { path: 'completed', component: CompletedComponent },
+  { path: '**', component: ErrorComponent }
+  
 ];
 
 @NgModule({

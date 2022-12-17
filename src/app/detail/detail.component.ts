@@ -6,6 +6,7 @@ import { CookieService } from "ngx-cookie-service";
 import { MatDialog } from "@angular/material/dialog";
 import { CartService } from 'src/services/cart.service';
 import { DialogComponent } from '../dialog/dialog.component';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-detail',
@@ -18,28 +19,61 @@ export class DetailComponent implements OnInit {
   product : Item;
   public products: Array<Item>;
   public cartTotal = 0;
+  public email : String;
 
   constructor(private route: ActivatedRoute, 
     private http : HttpClient, 
     private cookie: CookieService, 
     private cartService: CartService,
-    private box: MatDialog ) { }
+    private box: MatDialog,
+    private auth : AuthService ) 
+    
+    {
+
+      
+      this.auth.user$.subscribe(s => { 
+         this.email = s.email;
+        console.log(this.email);
+    });
+
+
+
+      let x  = this.route.snapshot.paramMap.get('id');
+
+  
+      let Payload = {
+        id : x,
+     }
+  
+  
+      //Http Request One
+      this.http
+      .post<any>("https://localhost:7005/Products/Id", Payload)
+      .subscribe((data) => {
+        console.log("Data activated !");
+        this.products = data;
+        console.log(this.products[0].brand);
+
+        
+        var i = {
+          brand : this.products[0].brand,
+          user : 'iooiho'
+        }
+    
+        http.post<any>("https://localhost:7005/Users/Choices", i).subscribe();
+      
+      });
+
+      var i = {
+        Brand : 'bib'
+      }
+
+      http.post<any>("https://localhost:7005/Users/Choices" , i).subscribe(data => { console.log(data);});
+
+     }
 
   ngOnInit(): void {
 
-    let x  = this.route.snapshot.paramMap.get('id');
-    console.log(x);
-
-    let Payload = {
-      id : x,
-   }
-
-    this.http
-    .post<any>("https://localhost:7005/Products/Id", Payload)
-    .subscribe((data) => {
-      this.products = data;
-    
-    });
 
 
   }
@@ -77,6 +111,4 @@ export class DetailComponent implements OnInit {
 
 
   }
- 
-
 }

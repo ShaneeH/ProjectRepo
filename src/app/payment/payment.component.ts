@@ -8,6 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 
 
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -93,6 +94,11 @@ export class PaymentComponent implements OnInit {
     console.log(data);
   })
 
+  setTimeout(() => {
+    this.route.navigate(['/completed']);
+    console.log("5 SECONDS IS UP BITCH");
+}, 3000);  //3s
+
 
  
  
@@ -134,8 +140,6 @@ export class PaymentComponent implements OnInit {
  
    console.log(x);
    console.log(JSON.stringify(j));
-
-
 
 
 
