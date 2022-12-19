@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common'
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-home',
@@ -11,17 +13,20 @@ import { DOCUMENT } from '@angular/common'
 export class HomeComponent implements OnInit {
 
   public admin : boolean = false;
+  public email : String;
 
-  constructor(public auth: AuthService, @Inject(DOCUMENT) public document: Document) {
+  constructor(public auth: AuthService, @Inject(DOCUMENT) public document: Document, private http : HttpClient) {
     
     //Check for what Role the User is
     this.auth.user$.subscribe(s => { 
+      
          if(s['role'] == 'admin'){
             this.admin = true;
          }
-         console.log(s);
-     });
         
+     });
+
+
    } 
   
   ngOnInit(): void {

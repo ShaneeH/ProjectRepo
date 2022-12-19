@@ -35,7 +35,7 @@ export class DetailComponent implements OnInit {
       let e : string;
       this.auth.user$.subscribe(s => { 
          this.email = s.nickname;
-         e = s.nickname;;
+         e = s.nickname;
         console.log(this.email);
     });
 
@@ -64,6 +64,13 @@ export class DetailComponent implements OnInit {
           brand : this.products[0].brand,
           email : e
         }
+
+        var p = 
+        {
+          email : e
+        }
+
+        localStorage.setItem('Username' , e);
         
         //Create a DB with the User's name if there isnt one already created
         http.post<any>("https://localhost:7005/User/CreateDB", i).subscribe();
@@ -73,6 +80,13 @@ export class DetailComponent implements OnInit {
 
         //Increment the Value assoicated with the Brand
         http.post<any>("https://localhost:7005/User/UpdateBrand", i).subscribe();
+
+        //Let get the Latest JSON File that has the Users Data tracked
+        http.post<any>("https://localhost:7005/User/Data" , p).subscribe(data => {
+          console.log("Received User Data !");
+          console.log(data);
+
+        })
 
       
       });

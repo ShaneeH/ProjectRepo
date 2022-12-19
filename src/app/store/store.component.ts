@@ -53,7 +53,7 @@ export class StoreComponent implements OnInit {
       .get<any>("https://localhost:7005/Products/All")
       .subscribe((data) => {
         this.products = data;
-        console.log("API Call attempt :");
+
       });
     //Get Categories from API
     this.http
@@ -64,6 +64,8 @@ export class StoreComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
    
   }
 
