@@ -20,10 +20,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angularShop'`, () => {
+  it(`should have as title 'mobile direct'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angularShop');
+    expect(app.title).toEqual('Mobile Direct');
   });
 
   it('should render title', () => {

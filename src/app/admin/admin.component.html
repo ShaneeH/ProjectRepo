@@ -97,10 +97,30 @@
       <br>
       <button mat-raised-button color="accent" type="submit">Delete Product</button>
   </form>
+<br>
+<br>
 
+  <h3>Lets Change the Price of an Exsisting Product</h3>
+<form [formGroup]="UpdatePriceForm" (ngSubmit)="updatePrice()">
+<mat-form-field appearance="fill">
+  <mat-label>Choose Products</mat-label>
+  <mat-select formControlName="id">
+    <mat-option *ngFor="let i of products" [value]="i.id" >
+      {{i.name}} - €{{i.price}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+  <mat-label for="first-name" >Enter New Price </mat-label>
+  <input matInput id="price" type="text" formControlName="price">
+</mat-form-field>
+<br>
+<button mat-raised-button color="accent" type="submit">Update Price</button>
+</form>
 
 </div>
-
+<br>
 <div *ngIf="Admin == false">
   <h1>You shouldnt be here.</h1>
 </div>

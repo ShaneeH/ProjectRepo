@@ -23,10 +23,13 @@ export class BasketComponent implements OnInit {
   _value : number = 1;
   basket_size : number = 0;
   total_fixed : number = 0;
-
+  promo_deductions : number = 0;
+   
 
   //Promo Variables
   promo_active : boolean = false;
+  discount_active : boolean = false;
+
   promo_invalid : boolean = false;
   Banner : boolean = true;
 
@@ -121,8 +124,9 @@ export class BasketComponent implements OnInit {
 
   }
 
-  //The Maxm Qty amount a User can have of one item is 10
+  
   increase(i : Item_cart){
+    //The Max Qty amount a User can have of one item is 10
     i.qty = i.qty + 1;
     this.total = this.total + i.price;
 
@@ -130,6 +134,8 @@ export class BasketComponent implements OnInit {
         i.qty = 10;
         this.total = this.total - i.price;
     }
+
+ 
   }
 
   
@@ -149,11 +155,16 @@ export class BasketComponent implements OnInit {
     if (i.qty < 1){
           i.qty = 1;
     }
+
   }
 
+  //If the User want to Remove an Item from the Cart
   remove(i : Item_cart){
+    //First we get the Subtotal of that Items
     let x = i.price * i.qty;
+    //Then Minus it from the Basket Total
     this.total = this.total - x; 
+
     this.display_products = this.display_products.filter(e => e.name != i.name);
     this.products = this.products.filter(e => e.name != i.name);
     window.localStorage.setItem("Cart_Items", JSON.stringify(this.products));
@@ -168,10 +179,20 @@ export class BasketComponent implements OnInit {
        this.shipping = 0;
        this.promo_active = true;
        this.promo_invalid = false;
+       this.promo_deductions = this.promo_deductions + 10;
     } else {
        this.shipping = this.shipping;
        this.promo_invalid = true;
        this.promo_active = false;
+    }
+
+    if (promo == 'promo25'){
+        let discount = this.total * .25;
+        this.promo_deductions = discount;
+        this.total = this.total - discount;
+        this.promo_deductions = this.promo_deductions + discount;
+        this.discount_active = true;
+        this.promo_invalid = false
     }
   }
 

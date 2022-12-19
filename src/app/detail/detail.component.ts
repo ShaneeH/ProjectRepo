@@ -7,20 +7,27 @@ import { MatDialog } from "@angular/material/dialog";
 import { CartService } from 'src/services/cart.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { AuthService } from '@auth0/auth0-angular';
+import { User_Data } from 'src/models/user_data';
+
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss']
+  styleUrls: ['./detail.component.scss','./detail.component.css' ]
 })
 export class DetailComponent implements OnInit {
 
   private Id : String;
   product : Item;
   public products: Array<Item>;
+  public user_data: Array<User_Data>
   public cartTotal = 0;
   public email : String;
   public name : String;
+
+  public display_promo : Boolean = false;
+  public brand_promo : String;
+
 
 
   constructor(private route: ActivatedRoute, 
@@ -34,6 +41,7 @@ export class DetailComponent implements OnInit {
 
       let e : string;
       this.auth.user$.subscribe(s => { 
+        
          this.email = s.nickname;
          e = s.nickname;
         console.log(this.email);
@@ -72,6 +80,10 @@ export class DetailComponent implements OnInit {
 
         localStorage.setItem('Username' , e);
         
+      
+          //Create a DB with the User's name if there isnt one already created
+        http.post<any>("https://localhost:7005/User/CreateDB", i).subscribe();
+   
         //Create a DB with the User's name if there isnt one already created
         http.post<any>("https://localhost:7005/User/CreateDB", i).subscribe();
 
@@ -85,6 +97,18 @@ export class DetailComponent implements OnInit {
         http.post<any>("https://localhost:7005/User/Data" , p).subscribe(data => {
           console.log("Received User Data !");
           console.log(data);
+          this.user_data = data;
+         
+
+          for(let i = 0; i < this.user_data.length; i++){
+                //This will Prove the Customer is liking the Product 
+                if(this.user_data[i].clicks > 20){
+                    console.log(this.user_data[i] ,"has loads of clicks ");
+                    this.showPromo(this.user_data[i].brand);
+                }
+
+
+          }
 
         })
 
@@ -130,7 +154,18 @@ export class DetailComponent implements OnInit {
     document.cookie = `cart_size = ${this.cartService.CartData.length}`;
     this.cartTotal = this.cartTotal + item.price;
     document.cookie = `cart_total = ${this.cartTotal}`;
+  }
 
+  showPromo(brand : string){
+    //If the User is showing Strong interest in a Brand we will try
+    //Intice him to purchase something by first giving him a Promo Code for that Brand
+    //Then Sending him a further Marketing Email
+    //We will then Reset the Clicks Number assoicated with the Brand 
+
+
+    console.log("Show Promo Activated for " + brand);
+    this.brand_promo = brand;
+    this.display_promo = true;
 
   }
 }

@@ -20,7 +20,9 @@ export class AdminComponent implements OnInit {
   public Amount : number;
   public Qty : number;
   public Admin : Boolean;
+  public products: Array<Item>;
 
+ 
 
 
   ProductForm = new FormGroup({
@@ -34,6 +36,11 @@ export class AdminComponent implements OnInit {
 
   DeleteForm = new FormGroup({
     id: new FormControl('')
+  });
+
+  UpdatePriceForm = new FormGroup({
+    id: new FormControl(''),
+    price : new FormControl('')
   });
 
 
@@ -64,6 +71,14 @@ export class AdminComponent implements OnInit {
       console.log(this.Qty);
     });
 
+         //Get Products from API
+         this.http
+         .get<any>("https://localhost:7005/Products/All")
+         .subscribe((data) => {
+           this.products = data;
+   
+         });
+
   
    }
 
@@ -92,6 +107,17 @@ export class AdminComponent implements OnInit {
         console.log(data);
     });
 
+    }
+
+    updatePrice(){
+      let url = "https://localhost:7005/Products/UpdatePrice"
+      this.http.post<any>(url ,this.UpdatePriceForm.value).subscribe(data => {
+        console.log(data);
+    });
+      console.log(this.UpdatePriceForm.value);
+      
+
+    
     }
   }
 
