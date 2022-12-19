@@ -20,6 +20,8 @@ export class DetailComponent implements OnInit {
   public products: Array<Item>;
   public cartTotal = 0;
   public email : String;
+  public name : String;
+
 
   constructor(private route: ActivatedRoute, 
     private http : HttpClient, 
@@ -30,23 +32,25 @@ export class DetailComponent implements OnInit {
     
     {
 
-      
+      let e : string;
       this.auth.user$.subscribe(s => { 
-         this.email = s.email;
+         this.email = s.nickname;
+         e = s.nickname;;
         console.log(this.email);
     });
 
 
-
-      let x  = this.route.snapshot.paramMap.get('id');
+    //The ID of the Product we want to be dispalyed, Its held in the URL
+    let url_id  = this.route.snapshot.paramMap.get('id');
 
   
       let Payload = {
-        id : x,
+        id : url_id
      }
   
   
-      //Http Request One
+      //The URL Will hold the ID Value for the Product we are trying to get
+      //So we will Send this ID to the Backend and it will give us back the product in return
       this.http
       .post<any>("https://localhost:7005/Products/Id", Payload)
       .subscribe((data) => {
@@ -54,22 +58,26 @@ export class DetailComponent implements OnInit {
         this.products = data;
         console.log(this.products[0].brand);
 
-        
+
+        //This is the JSON Object we will send to the Backend Server
         var i = {
           brand : this.products[0].brand,
-          user : 'iooiho'
+          email : e
         }
-    
-        http.post<any>("https://localhost:7005/Users/Choices", i).subscribe();
+        
+        //Create a DB with the User's name if there isnt one already created
+        http.post<any>("https://localhost:7005/User/CreateDB", i).subscribe();
+
+        //Insert the Brand into the DB if its not already there
+        http.post<any>("https://localhost:7005/User/CreateBrand", i).subscribe();
+
+        //Increment the Value assoicated with the Brand
+        http.post<any>("https://localhost:7005/User/UpdateBrand", i).subscribe();
+
       
       });
 
-      var i = {
-        Brand : 'bib'
-      }
-
-      http.post<any>("https://localhost:7005/Users/Choices" , i).subscribe(data => { console.log(data);});
-
+  
      }
 
   ngOnInit(): void {

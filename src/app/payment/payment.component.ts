@@ -96,7 +96,7 @@ export class PaymentComponent implements OnInit {
 
   setTimeout(() => {
     this.route.navigate(['/completed']);
-    console.log("5 SECONDS IS UP BITCH");
+  
 }, 3000);  //3s
 
 
