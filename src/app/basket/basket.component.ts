@@ -41,6 +41,8 @@ export class BasketComponent implements OnInit {
 
   //This is the Array with the Quantites set by the user
   display_products_final : Item_cart[] = [];
+  display_products_finalz : Item_cart[] = [];
+
 
   //Form for User Entered Promo Code
   promoCode = new FormGroup({
@@ -66,11 +68,9 @@ export class BasketComponent implements OnInit {
       });
     } catch (error) {  console.log(error);}
 
-    //We are using Local Storage to store the Users Product's
-    //When the User clicks add to cart it will append that product to one long string
-    //So this method is used to remove duplicates from that string
-
+    //We need to remove Duplicates of the Same Products from the Array
     var uniqueIds: any[] = [];
+
     var unique = this.products.filter(element => {
     const isDuplicate = uniqueIds.includes(element.name);
   
@@ -78,7 +78,8 @@ export class BasketComponent implements OnInit {
       uniqueIds.push(element.name);
   
       return true;
-    } 
+    }
+  
     return false;
   });
 
@@ -99,6 +100,22 @@ export class BasketComponent implements OnInit {
         }
         this.display_products.push(obj);
   }
+
+
+
+
+
+  //THIS IS THE ARRAY AT POINT 1 !!!
+  for (let i =0; i < this.display_products.length; i++){
+    console.log(this.display_products[i]);
+  }
+
+
+
+
+
+
+
 
 
   //To get the Total amount of the Basket
@@ -135,6 +152,12 @@ export class BasketComponent implements OnInit {
         i.qty = 10;
         this.total = this.total - i.price;
     }
+    console.log("New Render");
+    for (let i =0; i < this.display_products.length; i++){
+      
+      console.log(this.display_products[i]);
+    }
+  
 
  
   }
@@ -173,7 +196,7 @@ export class BasketComponent implements OnInit {
 
   addPromo(){
     //This is where the User can get a discount
-    //If a Promo is Valid we will activate a Boolean and Deduct the discount from the total amount
+
     let promo = this.promoCode.get('code').value;
 
     if(promo == 'santa'){
@@ -217,30 +240,20 @@ export class BasketComponent implements OnInit {
     //Open up the Payment Platform
     //This is Timed so will close after a set amount of time
 
-    this.box.open(PaymentComponent);
-    setTimeout(() => {
-      this.box.closeAll();
-      location.reload();
-    }, 266100);
+
 
     //Object Factory Create Items with 'Qty' added
     //We Need this to send back to the API 
     //This JSON Object will the be used for the Emailing Service API
 
-    for(let i = 0; i < this.display_products.length; i++){
-      var obj : Item_cart  = {
-        name : this.display_products[i].name,
-        price : this.display_products[i].price,
-        brand: this.display_products[i].brand,
-        desc: this.display_products[i].desc,
-        type: this.display_products[i].type,
-        img: this.display_products[i].img,
-        qty : this.display_products[i].qty
-      }
-        this.display_products_final.push(obj);
-}
+     window.localStorage.setItem('array_final' , JSON.stringify(this.display_products));
 
-     window.localStorage.setItem('basket_final' , JSON.stringify(this.display_products_final));
+     this.box.open(PaymentComponent);
+     setTimeout(() => {
+       this.box.closeAll();
+       location.reload();
+     }, 266100);
+     
 
 
   }

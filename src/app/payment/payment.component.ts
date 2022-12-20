@@ -27,8 +27,9 @@ export class PaymentComponent implements OnInit {
   public arr = [];
 
 
-   //This Form ensures that the User in inputting correct Data into the Payment Form
+
   form = this.fb.group({
+
     address: ['', [Validators.required, Validators.minLength(1)]],
     country: ['', [Validators.required]],
     cardName: ['', [Validators.required]],
@@ -36,6 +37,7 @@ export class PaymentComponent implements OnInit {
     cvv: ['', [Validators.required]],
     expireYear: ['', [Validators.required]],
     expireMonth: ['', [Validators.required]]
+
  });
 
  constructor(private fb: FormBuilder, private route : Router, private http: HttpClient, public auth: AuthService) { 
@@ -72,10 +74,9 @@ for(let i = 0; i < arr.length; i++){
      let total = this.Total;
  
     //The JSON with the Items from the Users Basket
-    let x = localStorage.getItem('basket_final');
+    let x = localStorage.getItem('array_final');
 
         //This is the Object we Send the Email API Service
-        //This lets us get todays Date and Format it Correctyl 
         let today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -86,7 +87,7 @@ for(let i = 0; i < arr.length; i++){
         
 
 
-    //This is the JSON that will be send to Emailing Service with the Users Data inserted
+
      let j = {
        "to": [
            {
@@ -114,7 +115,7 @@ for(let i = 0; i < arr.length; i++){
     headers: new HttpHeaders({
       'accept' : 'application/json',
       'Content-Type':  'application/json',
-       'api-key': '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'
+       'api-key': 'Enter Api Key Here !'
 
     })
   };
@@ -147,7 +148,7 @@ for(let i = 0; i < arr.length; i++){
 
 
 
-  //We wait a few seconds then Guide the user to the Completed Component 
+
   setTimeout(() => {
     this.route.navigate(['/completed']);
   
