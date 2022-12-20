@@ -8,7 +8,8 @@ import {Title} from "@angular/platform-browser";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent{
-
+  
+  //Set the Title to be displayed in the Browser Tab
   constructor(private titleService:Title) {
     this.titleService.setTitle("Mobile Direct");
   }

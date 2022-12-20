@@ -16,6 +16,11 @@ export class HomeComponent implements OnInit {
   public email : String;
 
   constructor(public auth: AuthService, @Inject(DOCUMENT) public document: Document, private http : HttpClient) {
+
+    /**
+     * This is the Home Page the first Page a User will see
+     * 
+     */
     
     //Check for what Role the User is
     this.auth.user$.subscribe(s => { 

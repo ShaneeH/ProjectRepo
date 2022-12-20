@@ -66,9 +66,11 @@ export class BasketComponent implements OnInit {
       });
     } catch (error) {  console.log(error);}
 
-    //We need to remove Duplicates of the Same Products from the Array
-    var uniqueIds: any[] = [];
+    //We are using Local Storage to store the Users Product's
+    //When the User clicks add to cart it will append that product to one long string
+    //So this method is used to remove duplicates from that string
 
+    var uniqueIds: any[] = [];
     var unique = this.products.filter(element => {
     const isDuplicate = uniqueIds.includes(element.name);
   
@@ -76,8 +78,7 @@ export class BasketComponent implements OnInit {
       uniqueIds.push(element.name);
   
       return true;
-    }
-  
+    } 
     return false;
   });
 
@@ -172,7 +173,7 @@ export class BasketComponent implements OnInit {
 
   addPromo(){
     //This is where the User can get a discount
-
+    //If a Promo is Valid we will activate a Boolean and Deduct the discount from the total amount
     let promo = this.promoCode.get('code').value;
 
     if(promo == 'santa'){

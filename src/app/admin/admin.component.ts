@@ -15,7 +15,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
+  
+  //Declare Variables 
   public Orders : Array<Order>;
   public Amount : number;
   public Qty : number;
@@ -24,7 +25,10 @@ export class AdminComponent implements OnInit {
 
  
 
+  //These are the Angular Forms we nee to use te Capture the User Data 
+  //All this Data is converted into JSON Objects to be sent back to my API
 
+  //Admins can create new Products so we use this form
   ProductForm = new FormGroup({
     name: new FormControl(''),
     price: new FormControl(''),
@@ -34,41 +38,47 @@ export class AdminComponent implements OnInit {
     img : new FormControl('')
   });
 
+  //Admins can delete a Product based of it's id
   DeleteForm = new FormGroup({
     id: new FormControl('')
   });
 
+  //Admins can update the price of a exsisting Product using this Form
   UpdatePriceForm = new FormGroup({
     id: new FormControl(''),
     price : new FormControl('')
   });
 
-
+ 
   constructor(public cookie: CookieService, public auth: AuthService, private http: HttpClient, private cookieService: CookieService) {
           //Check for what Role the User is
+          //We need to make sure the User is an Admin
+          //This needs to be done before the Components are loaded in so we do this in the constructor
           this.auth.user$.subscribe(s => { 
             if(s['role'] == 'admin'){
                this.Admin = true;
             }
-            console.log(s);
+         
         });
 
-
+    //Receive all Order Data from my Backend
     let url = "https://localhost:7005/Orders/All";
     this.http.get<any>(url).subscribe(data =>{
       this.Orders = data;
     });
 
+    //Get the Total Cash Amount of these Orders
     let url2 = "https://localhost:7005/Orders/All/Amount";
     this.http.get<any>(url2).subscribe(data2 =>{
       this.Amount = data2.toFixed(2);
-      console.log(this.Amount);
+     
     });
 
+    //Get the Total amount of Orders have been created
     let url3 = "https://localhost:7005/Orders/All/Quantity";
     this.http.get<any>(url3).subscribe(data3 =>{
       this.Qty = data3;
-      console.log(this.Qty);
+     
     });
 
          //Get Products from API
@@ -87,34 +97,30 @@ export class AdminComponent implements OnInit {
 
   createProduct(){
 
-    
-    console.log(this.ProductForm.value);
-     
-    console.log("Button clicked");
     let url = "https://localhost:7005/Products/Create";
-
     this.http.post<any>(url ,this.ProductForm.value).subscribe(data => {
-      console.log(data);
+    
   });
 
     }
 
     deleteProduct(){
-      console.log(this.DeleteForm.value);
-      let url = "https://localhost:7005/Product/Delete";
 
+      //This is the Method used for Deleting a Product
+      let url = "https://localhost:7005/Product/Delete";
       this.http.post<any>(url ,this.DeleteForm.value).subscribe(data => {
-        console.log(data);
+        
     });
 
     }
 
     updatePrice(){
+      //This is the Method used for Price Updating a Product
       let url = "https://localhost:7005/Products/UpdatePrice"
       this.http.post<any>(url ,this.UpdatePriceForm.value).subscribe(data => {
-        console.log(data);
+      ;
     });
-      console.log(this.UpdatePriceForm.value);
+      
       
 
     

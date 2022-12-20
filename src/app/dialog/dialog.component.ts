@@ -15,6 +15,13 @@ export class DialogComponent implements OnInit {
   public Reccomended_Item : Array<Item>;
   public RandomItem : Item;
 
+
+  /*
+  When a User Clicks to add a 'Phone' to there Basket we will try sell them a accessory that pairs with that phone
+  For Example if they add iPhone to the basket it will display a Case or Earbuds that work with iPhone it will never suggest them
+  an item that Dosent pair with there phone
+
+  */
   constructor(shared : SharedDataService, private http: HttpClient) {
     this.LatestItem = shared.LatestItem;
     //We only Display Reccomended Items if the User Picks a phone

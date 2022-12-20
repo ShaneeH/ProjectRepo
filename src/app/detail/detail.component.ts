@@ -16,6 +16,7 @@ import { User_Data } from 'src/models/user_data';
   styleUrls: ['./detail.component.scss','./detail.component.css' ]
 })
 export class DetailComponent implements OnInit {
+  //when a User Clicks on a Product this is the Component that will display that Product
 
   private Id : String;
   product : Item;
@@ -49,9 +50,11 @@ export class DetailComponent implements OnInit {
 
 
     //The ID of the Product we want to be dispalyed, Its held in the URL
+    //This line of code Pulls the id From the Url "Product/1" -> Product id is 1
+    //Send this integer to the back end to get the product data for that id
     let url_id  = this.route.snapshot.paramMap.get('id');
 
-  
+    
       let Payload = {
         id : url_id
      }
@@ -80,8 +83,17 @@ export class DetailComponent implements OnInit {
 
         localStorage.setItem('Username' , e);
         
-      
-          //Create a DB with the User's name if there isnt one already created
+        
+        /*
+          This is the Tracking Part of the Application
+          this is where we monitor the Users Clicks and store them
+          What will happen is it will create a Table in the DataBase using the shoppers Username
+          When they click on an Item it will create a Row in the Table with how many times they Click
+          Once they show Strong Interest in a Product we will display to them a Promo Code for that Item
+          to Further Intice them to purchase that Item
+        */
+
+        //Create a DB with the User's name if there isnt one already created
         http.post<any>("https://localhost:7005/User/CreateDB", i).subscribe();
    
         //Create a DB with the User's name if there isnt one already created
@@ -95,34 +107,18 @@ export class DetailComponent implements OnInit {
 
         //Let get the Latest JSON File that has the Users Data tracked
         http.post<any>("https://localhost:7005/User/Data" , p).subscribe(data => {
-          console.log("Received User Data !");
-          console.log(data);
           this.user_data = data;
          
 
           for(let i = 0; i < this.user_data.length; i++){
                 //This will Prove the Customer is liking the Product 
-                if(this.user_data[i].clicks > 20){
-                    console.log(this.user_data[i] ,"has loads of clicks ");
-                    this.showPromo(this.user_data[i].brand);
-                }
+                if(this.user_data[i].clicks > 6){
+                    this.showPromo(this.user_data[i].brand); }
+              }})    
+          }); 
+        }
 
-
-          }
-
-        })
-
-      
-      });
-
-  
-     }
-
-  ngOnInit(): void {
-
-
-
-  }
+  ngOnInit(): void { }
 
   addToCart(item){
 
@@ -160,10 +156,8 @@ export class DetailComponent implements OnInit {
     //If the User is showing Strong interest in a Brand we will try
     //Intice him to purchase something by first giving him a Promo Code for that Brand
     //Then Sending him a further Marketing Email
-    //We will then Reset the Clicks Number assoicated with the Brand 
+    //We will then Reset the Clicks Number assoicated with the Brand
 
-
-    console.log("Show Promo Activated for " + brand);
     this.brand_promo = brand;
     this.display_promo = true;
 

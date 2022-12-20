@@ -61,11 +61,12 @@
     </div>
   </div>
 </section>
+<!-- This is to check if the User is logged in-->
 <div class="auth">
 <ul *ngIf="auth.user$ | async as user">
   Welcome Back {{ user.nickname}} 
 </ul>
-
+<!-- If the User is logged in it will Display a 'Logout' button-->
 <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
   <button mat-raised-button color="primary" (click)="auth.logout({ returnTo: document.location.origin })"> Log out </button>
 </ng-container>

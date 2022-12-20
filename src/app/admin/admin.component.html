@@ -5,6 +5,8 @@
 
 
 <!-- Security Measure to stop non-admins having access to these controlls-->
+<!-- The Application will only run this code if the User has Admin Access -->
+
 <div *ngIf="Admin == true">
 
   <div class="admin">
@@ -22,7 +24,7 @@
 <br><br>
 
 
-
+<!--This is the Table used for Displaing Order Data-->
 <table class="styled-table">
     <thead>
         <tr>
@@ -47,9 +49,11 @@
     </tbody>
 </table>
 <br>
+
 <h3> As Admin you can add new Products to the Catalog</h3>
 
 <br>
+<!-- Form for Product Creation -->
   <form [formGroup]="ProductForm" (ngSubmit)="createProduct()">
 
     <mat-form-field appearance="fill">
@@ -88,6 +92,7 @@
   </form>
 <br>
 
+<!--Form for Product Deletion -->
   <h3> As Admin you can delete a Product by ID</h3>
   <form [formGroup]="DeleteForm" (ngSubmit)="deleteProduct()">
     <mat-form-field appearance="fill">
@@ -100,16 +105,18 @@
 <br>
 <br>
 
-  <h3>Lets Change the Price of an Exsisting Product</h3>
-<form [formGroup]="UpdatePriceForm" (ngSubmit)="updatePrice()">
-<mat-form-field appearance="fill">
-  <mat-label>Choose Products</mat-label>
-  <mat-select formControlName="id">
-    <mat-option *ngFor="let i of products" [value]="i.id" >
-      {{i.name}} - €{{i.price}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+
+<!--Form for Price Update -->
+<h3>Lets Change the Price of an Exsisting Product</h3>
+  <form [formGroup]="UpdatePriceForm" (ngSubmit)="updatePrice()">
+  <mat-form-field appearance="fill">
+    <mat-label>Choose Products</mat-label>
+    <mat-select formControlName="id">
+      <mat-option *ngFor="let i of products" [value]="i.id" >
+        {{i.name}} - €{{i.price}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
 <mat-form-field appearance="fill">
   <mat-label for="first-name" >Enter New Price </mat-label>
@@ -121,6 +128,7 @@
 
 </div>
 <br>
+<!--This Block of Code will be displayed if the Admin is not an Admin -->
 <div *ngIf="Admin == false">
   <h1>You shouldnt be here.</h1>
 </div>

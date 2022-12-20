@@ -1,6 +1,7 @@
 
 <body>
     <main>
+     <!-- This is to Display the Product they clicked on-->
         <div *ngFor="let i of products">
       <div class="card">
         <div class="card__title">
@@ -55,6 +56,8 @@
       </div>
     </div>
     </main>
+    <!-- This is the Code that will Display the Promo Code -->
+    <!-- This will only show when the user shows strong interest in a Product -->
     <div *ngIf="display_promo == true">
       <div class="banner animated tada">
         <div class=" big-text animated tada">25% OFF</div>
@@ -62,7 +65,6 @@
          <a>Code: Promo25</a>
        </div>
     </div>
-
 
   </body>
   

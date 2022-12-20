@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(public auth: AuthService, private http: HttpClient) {
     this.auth.user$.subscribe(s => {
-      //Get User Data from Auth0 server
+      //Get User's Data from the Auth0 server
       this.AuthEmail = s.email
       this.AuthName = s.nickname
       this.AuthImg = s.picture
@@ -31,12 +31,11 @@ export class ProfileComponent implements OnInit {
         email : this.AuthEmail
      }
     
-     console.log(Payload);
+  
       this.http
       .post<any>("https://localhost:7005/Orders/Email", Payload)
       .subscribe((data) => {
-        this.OrderList = data;
-        console.log(data);
+        this.OrderList = data;  
       });
   })
 

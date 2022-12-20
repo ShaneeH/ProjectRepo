@@ -17,22 +17,17 @@ import { Observable, Subject } from 'rxjs';
   styleUrls: ["./store.component.css", "./navstyle.scss", './sty.scss'],
 })
 export class StoreComponent implements OnInit {
+  //Declare Variables
   public cartSubject = new Subject<any>();
-
   public filters = [];
   public Sort = [];
   public itemName;
   public itemPrice;
-  //public products : any;
   public Categories = [];
   public products: Array<Item>;
-
   public cartTotal = 0;
-
   public search : boolean = false;
-
   public searchedProducts: Array<Item>;
-
   public LatestProduct : Item;
 
   //When using frop-down you need to use form
@@ -48,14 +43,14 @@ export class StoreComponent implements OnInit {
     private c: CookieCartService,
     private share: SharedDataService
   ) {
-    //Get Products from API
+    //Get all the Products from API
     this.http
       .get<any>("https://localhost:7005/Products/All")
       .subscribe((data) => {
         this.products = data;
 
       });
-    //Get Categories from API
+    //Get the products Categories from API
     this.http
       .get<any>("https://localhost:7005/Products/Brands")
       .subscribe((data) => {
@@ -63,17 +58,12 @@ export class StoreComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-
-    
-   
-  }
+  ngOnInit(): void { }
 
   filter() {
     //This is code for the First Dropdown Menu
     //Add user selection to array
     this.filters.length = 0;
-    //const result : string[] = [];
     let b: string = this.form.value.toString();
     this.filters.push(b); //Filters is an array
    
@@ -90,6 +80,7 @@ export class StoreComponent implements OnInit {
 
   }
 
+  //Method that will add the User's choice the Cart
   addToCart(item) {
     
     this.LatestProduct = item;
@@ -124,7 +115,7 @@ export class StoreComponent implements OnInit {
     document.cookie = `cart_total = ${this.cartTotal}`;
 
 
-
+    //Dialog Box to reccomend them an Item based on there Selection
     this.box.open(DialogComponent);
     setTimeout(() => {
       this.box.closeAll();
@@ -135,18 +126,19 @@ export class StoreComponent implements OnInit {
     
   }
 
+  //When the wants to Search for an Item using a 'String'
+  //It will activate an Event that is sent to this method
   onSubmit(event: any) {
-
     let x = event.target.player.value.toString();
     let Payload = {
       search : x,
    }
 
+   //String is sent to the Backend so it will compute the search results
     this.http
     .post<any>("https://localhost:7005/Search", Payload)
     .subscribe((data) => {
       this.products = data;
-  
     });
 
   }
