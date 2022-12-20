@@ -43,6 +43,12 @@ export class StoreComponent implements OnInit {
     private c: CookieCartService,
     private share: SharedDataService
   ) {
+
+    //Calculate how many Items are in Basket 
+    let arr = [];
+    arr = JSON.parse(localStorage.getItem('array_final'));
+    localStorage.setItem('basket_size' , arr.length.toString());
+ 
     //Get all the Products from API
     this.http
       .get<any>("https://localhost:7005/Products/All")

@@ -108,12 +108,18 @@ export class DetailComponent implements OnInit {
         //Let get the Latest JSON File that has the Users Data tracked
         http.post<any>("https://localhost:7005/User/Data" , p).subscribe(data => {
           this.user_data = data;
-         
+          console.log(data);
 
           for(let i = 0; i < this.user_data.length; i++){
+            console.log(this.user_data[i]);
                 //This will Prove the Customer is liking the Product 
-                if(this.user_data[i].clicks > 6){
-                    this.showPromo(this.user_data[i].brand); }
+                if(this.user_data[i].clicks > 10)
+                   {  
+                    this.showPromo(this.user_data[i].brand);
+                   }
+                if (this.user_data[i].clicks > 15){
+                  http.post<any>("https://localhost:7005/User/DecreaseBrand", i).subscribe();  
+                }
               }})    
           }); 
         }

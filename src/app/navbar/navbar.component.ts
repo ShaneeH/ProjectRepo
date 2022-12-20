@@ -9,10 +9,12 @@ import { RouterOutlet } from "@angular/router";
   styleUrls: ["./navbar.component.css"],
 })
 export class NavbarComponent implements OnInit {
-  public cartSize: number;
+  public basketSize: number;
   public admin: boolean = false;
 
   constructor(public auth: AuthService, public cookie: CookieService) {
+    this.basketSize = Number(localStorage.getItem('basket_size'));
+    console.log(this.basketSize);
     
     //Get Cookie that contains cart size to display in navbar
     

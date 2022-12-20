@@ -27,7 +27,7 @@ export class PaymentComponent implements OnInit {
   public arr = [];
 
 
-
+  //Ensure the User is entering in Valid Data into the Payment Form
   form = this.fb.group({
 
     address: ['', [Validators.required, Validators.minLength(1)]],
@@ -85,9 +85,6 @@ for(let i = 0; i < arr.length; i++){
         
         date_string = mm + '/' + dd + '/' + yyyy;
         
-
-
-
      let j = {
        "to": [
            {
@@ -106,9 +103,6 @@ for(let i = 0; i < arr.length; i++){
            "charset": "iso-8859-1"
        }
    };
- 
-   console.log(x);
-   console.log(JSON.stringify(j));
 
    //Options For the Email Service
    const httpOptions = {
@@ -122,7 +116,7 @@ for(let i = 0; i < arr.length; i++){
 
    //Sending all the Data to the Emailing API
    this.http.post<any>('https://api.sendinblue.com/v3/smtp/email' ,j , httpOptions).subscribe(data => {
-    console.log(data);
+    
   })
 
 
